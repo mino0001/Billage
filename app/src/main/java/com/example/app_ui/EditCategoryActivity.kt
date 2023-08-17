@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.io.Serializable
 
 
-// 카테고리 추가 및 삭제하는 액티비티
+
 class EditCategoryActivity : AppCompatActivity() {
 
 

@@ -1,48 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:focusableInTouchMode="true"
+    android:padding="15dp"
     >
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전송할 NFT"
-        android:textColor="@color/black"
+        android:text="보낼 NFT"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
-    <!--    수신자 정보-->
+<!--    수신자 정보-->
     <LinearLayout
         android:id="@+id/layout_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/edittext_border"
+        android:padding="10dp"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:background="@drawable/edittext_border">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수신자 정보"
             android:textColor="@color/black"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,121 +43,100 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="10dp"
-            android:paddingStart="10dp">
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_send_user_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="지갑주소"
                 android:textColor="@color/black"
                 android:textSize="25sp"
-                app:layout_constraintStart_toStartOf="@+id/tv_send_user_id"
-                app:layout_constraintTop_toBottomOf="@+id/tv_send_user_id" />
-
-            <EditText
-                android:id="@+id/et_send_user_id"
-                android:layout_width="185dp"
-                android:layout_height="48dp"
-                android:background="@drawable/edittext_border"
-                android:hint="이메일 입력하세요"
-                android:paddingStart="5dp"
-                android:inputType="textPersonName"
-                android:maxLength="20"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_send_user_id"
-                app:layout_constraintEnd_toEndOf="@+id/et_send_address"
-                app:layout_constraintStart_toStartOf="@+id/et_send_address"
-                app:layout_constraintTop_toTopOf="@id/tv_send_user_id" />
+                app:layout_constraintStart_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/et_send_name" />
 
             <EditText
                 android:id="@+id/et_send_address"
-                android:layout_width="185dp"
+                android:layout_width="200dp"
                 android:layout_height="48dp"
-                android:layout_gravity="right"
-                android:layout_marginStart="15dp"
-                android:paddingStart="5dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/edittext_border"
                 android:hint="지갑주소를 입력하세요"
                 android:inputType="textPersonName"
-                android:maxLength="50"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_send_user_address"
-                app:layout_constraintStart_toEndOf="@+id/tv_send_user_address"
-                app:layout_constraintTop_toTopOf="@+id/tv_send_user_address" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_send_name"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="이름을 입력하세요"
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_send_address" />
 
             <TextView
-                android:id="@+id/tv_send_user_id"
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="이메일"
+                android:text="이름"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_send_camera"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="4dp"
-                android:src="@drawable/icon_camera"
-                app:layout_constraintBottom_toBottomOf="@+id/et_send_address"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/et_send_address" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_2"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:layout_marginTop="15dp"
-        android:padding="5dp"
-        android:paddingBottom="10dp"
-        android:background="@drawable/edittext_border"
-        android:showDividers="middle"
-        android:divider="@drawable/divider"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toTopOf="@id/layout_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_1"
+        android:background="@drawable/edittext_border">
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginVertical="8dp"
+            android:layout_marginTop="8dp"
             android:text="NFT 목록"
             android:textColor="@color/black"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-             />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_send_nftlist"
+        <ListView
+            android:id="@+id/lv_send_nftlist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:layout_constrainedHeight = "true"
-         />
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/layout_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:padding="10dp"
-        >
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -180,77 +151,15 @@
             android:id="@+id/et_send_pw"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:maxLength="20"
-            android:hint="pin 번호를 입력하세요"
+            android:hint="별칭을 입력하세요"
             android:inputType="textPersonName"
             android:textColor="@color/black" />
 
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/layout_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="비고"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/tv_memo"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:hint=" (선택) 기타사항을 입력하세요. \n\n (최대 100자까지 입력 가능) "
-            android:inputType="textMultiLine"
-            android:text=""
-            android:maxLength="100"
-            android:maxLines="5"
-            android:textColor="@color/black" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="개인키 입력"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/et_private_key"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:hint="개인키를 입력하세요"
-            android:inputType="textMultiLine"
-            android:layout_marginTop="10dp"
-            android:padding="5dp"
-            android:background="@drawable/edittext_border"
-            android:maxLength="500"
-            android:maxLines="10"
-            android:textColor="@color/black" />
-
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_5"
+        android:id="@+id/layout_4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -261,32 +170,45 @@
 
         <Button
             android:id="@+id/btn_transmit"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:background="@drawable/btn_border"
             android:text="전송"
             android:textColor="#ffffff"
-            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="323dp" />
 
         <Button
             android:id="@+id/btn_cancel"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:background="@drawable/btn_border"
             android:text="취소"
             android:textColor="#ffffff"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_transmit"
             app:layout_constraintTop_toTopOf="@+id/btn_transmit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
-</ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>
 
 
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_transmit"-->
+<!--        android:layout_width="151dp"-->
+<!--        android:layout_height="73dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="637dp"-->
+<!--        android:layout_marginBottom="12dp"-->
+<!--        android:background="#00FFFFFF"-->
+<!--        android:text="Button"-->
+<!--        android:textColor="#00FFFFFF"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.555" />-->
 

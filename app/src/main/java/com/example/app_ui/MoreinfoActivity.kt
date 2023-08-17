@@ -11,21 +11,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.app_ui.databinding.ActivityEditBinding
-import com.example.app_ui.databinding.ActivitySend2Binding
+import com.example.app_ui.databinding.ActivityMoreinfoBinding
+import com.example.app_ui.databinding.ActivityQrnftBinding
 import com.example.app_ui.ui.theme.App_uiTheme
 
-class Send2Activity : ComponentActivity() {
+class MoreinfoActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivitySend2Binding.inflate(layoutInflater)
+        val binding = ActivityMoreinfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.btnTransmit.setOnClickListener {
-//            val intent = Intent(this, NotiActivity::class.java)
-//            startActivity(intent)
-//
-//        }
+        binding.btnNavhome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 }
