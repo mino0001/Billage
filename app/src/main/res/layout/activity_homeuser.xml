@@ -59,89 +59,105 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_user">
 
         <ImageView
-            android:id="@+id/iv_user_qr"
+            android:id="@+id/iv_user_icon"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/icon_user"
             app:layout_constraintBottom_toTopOf="@+id/tv_user_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/icon_qr" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_wallet_address"
+            android:id="@+id/tv_home_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Wallet Address"
+            android:text="학번"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/iv_user_qr"
+            app:layout_constraintEnd_toEndOf="@+id/iv_user_icon"
             app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="@+id/iv_user_qr"
+            app:layout_constraintStart_toStartOf="@+id/iv_user_icon"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
         <TextView
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:text="TeamBYM@sookmyung.ac.kr"
-            android:textSize="20sp"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/iv_user_qr"
-            app:layout_constraintStart_toStartOf="@+id/iv_user_qr"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_user_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_user_icon"
             app:layout_constraintTop_toBottomOf="@+id/tv_home_email" />
 
         <TextView
             android:id="@+id/tv_home_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:text="Email Address"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/iv_user_qr"
-            app:layout_constraintStart_toStartOf="@+id/iv_user_qr"
-            app:layout_constraintTop_toBottomOf="@+id/iv_user_qr" />
+            app:layout_constraintEnd_toEndOf="@+id/iv_user_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_user_icon"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_icon" />
 
         <TextView
-            android:id="@+id/tv_user_wallet_address"
+            android:id="@+id/tv_user_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="32dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="thisis13wallet437address3235"
+            android:text="2021134"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_copy"
+            app:layout_constraintBottom_toTopOf="@id/btn_change_pw"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_wallet_address"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_id"
             app:layout_constraintVertical_bias="0.0" />
 
-        <ImageButton
-            android:id="@+id/iv_copy"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
-            android:background="@android:color/transparent"
-            android:onClick="copyToClipboard"
-            android:scaleType="centerCrop"
-            android:src="@drawable/icon_copy"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <Button
+            android:id="@+id/btn_change_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@color/zxing_transparent"
+            android:onClick="onLoginClick"
+            android:textColor="#62953C"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="비밀번호 변경하기"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_user_wallet_address"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_id" />
+
+
+        <!--        <ImageButton-->
+<!--            android:id="@+id/iv_copy"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:onClick="copyToClipboard"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/icon_copy"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/tv_user_id"-->
+<!--            tools:ignore="SpeakableTextPresentCheck" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

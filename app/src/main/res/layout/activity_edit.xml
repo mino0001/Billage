@@ -6,7 +6,7 @@
     <data>
         <variable
             name="nft"
-            type="com.example.app_ui.Nft" />
+            type="com.example.billage.Goods" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

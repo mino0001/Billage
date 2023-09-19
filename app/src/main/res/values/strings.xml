@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">app_ui</string>
-    <string name="title_activity_nftinfo">NftinfoActivity</string>
+    <string name="app_name">billage</string>
+    <string name="title_activity_goodsinfo">GoodsinfoActivity</string>
+    <string name="title_activity_goodsnft">GoodsnftActivity</string>
     <string name="title_activity_homeuser">HomeuserActivity</string>
     <string name="title_activity_category">CategoryActivity</string>
     <string name="title_activity_noti">NotiActivity</string>
@@ -8,9 +9,11 @@
     <string name="title_activity_edit2">Edit2Activity</string>
     <string name="title_activity_send">sendActivity</string>
     <string name="title_activity_send2">Send2Activity</string>
-    <string name="title_activity_qr">QrActivity</string>
     <string name="title_activity_moreinfo">MoreinfoActivity</string>
-    <string name="title_activity_qrnft">QrnftActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_checkrent">CheckrentActivity</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

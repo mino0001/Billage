@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "app_ui"
+rootProject.name = "billage"
 include ':app'

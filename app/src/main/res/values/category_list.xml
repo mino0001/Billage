@@ -2,9 +2,7 @@
 <resources>
 <string-array name="category_list">
     <item>전체</item>
-    <item>카테고리1</item>
-    <item>카테고리2</item>
-    <item>카테고리3</item>
-    <item>카테고리4</item>
+    <item>노트북</item>
+    <item>태블릿pc</item>
 </string-array>
 </resources>

@@ -12,12 +12,12 @@ kotlin {
 }
 
 android {
-    namespace 'com.example.app_ui'
+    namespace 'com.example.billage'
     compileSdk 33
 
 
     defaultConfig {
-        applicationId "com.example.app_ui"
+        applicationId "com.example.billage"
         minSdk 24
         targetSdk 33
         versionCode 1
