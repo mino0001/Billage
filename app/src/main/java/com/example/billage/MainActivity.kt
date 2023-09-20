@@ -1,7 +1,6 @@
 package com.example.billage
 
 
-import LoginActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.widget.Toast
 import com.example.billage.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
 
-var loginFlag = 0
 class MainActivity : AppCompatActivity() {
 
     private var activityMainBinding: ActivityMainBinding? =null
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         // 레이아웃과 연결
         setContentView(activityMainBinding!!.root)
 
-        if (loginFlag== 0) {
+        if (loginFlag == 0) {
             /**
              * 예시
              */

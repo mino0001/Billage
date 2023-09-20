@@ -1,17 +1,17 @@
-package layout
+package com.example.billage
 
-import LoginActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import com.example.billage.databinding.ActivitySignupBinding
 
 private var binding: ActivitySignupBinding? = null
 
-class SignupActivity : AppCompatActivity() {
+class SignupActivity : ComponentActivity() {
 
     var isExistBlank = false
     var isPWSame = false

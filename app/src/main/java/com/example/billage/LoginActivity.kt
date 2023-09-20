@@ -1,16 +1,19 @@
+package com.example.billage
+
 import android.content.Intent
-import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import com.example.billage.MainActivity
+import com.example.billage.SignupActivity
 import com.example.billage.databinding.ActivityLoginBinding
-import com.example.billage.loginFlag
+
 
 private var binding: ActivityLoginBinding? = null
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : ComponentActivity() {
 //    private lateinit var usernameEditText: EditText
 //    private lateinit var passwordEditText: EditText
 
@@ -19,14 +22,14 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-        binding!!.btnLogin.setOnClickListener(){
+//        binding!!.btnLogin.setOnClickListener(){
+//
+//
+//        }
 
-
-        }
-
-        binding!!.btnSignup.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+        //binding!!.btnSignup.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding!!.btnSignup.setOnClickListener(){
-            intent = Intent(this, MainActivity::class.java)
+            intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
 
@@ -45,18 +48,21 @@ class LoginActivity : AppCompatActivity() {
 
         loginFlag = 1
 
+        intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
 
-        if (isValidCredentials(userId, userPw)) {
-            // 로그인 성공
-            //loginFlag = 1
-            showToast("로그인 성공!")
 
-            intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        } else {
-            // 로그인 실패
-            showToast("로그인 실패. 사용자 이름과 비밀번호를 확인하세요.")
-        }
+//        if (isValidCredentials(userId, userPw)) {
+//            // 로그인 성공
+//            //loginFlag = 1
+//            showToast("로그인 성공!")
+//
+//            intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        } else {
+//            // 로그인 실패
+//            showToast("로그인 실패. 사용자 이름과 비밀번호를 확인하세요.")
+//        }
     }
 
     private fun isValidCredentials(username: String, password: String): Boolean {

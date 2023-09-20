@@ -21,6 +21,7 @@ var goodsList = mutableListOf<Goods>()
 var categoryArray = arrayOf("노트북","태블릿pc")
 var count = 0
 var buttonFlag = 0
+var loginFlag = 0
 lateinit var goodsAdapter : GoodsAdapter
 
 class HomeFragment : Fragment() {
