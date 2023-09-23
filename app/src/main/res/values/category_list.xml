@@ -2,7 +2,10 @@
 <resources>
 <string-array name="category_list">
     <item>전체</item>
-    <item>노트북</item>
-    <item>태블릿pc</item>
+    <item>i5</item>
+    <item>i7</item>
+    <item>맥북</item>
+    <item>아이패드</item>
+    <item>삼성태블릿</item>
 </string-array>
 </resources>

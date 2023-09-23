@@ -24,7 +24,7 @@ class CheckrentActivity : ComponentActivity() {
 
 
         val rentDevice = intent.getIntExtra("device",0)
-        val rentOs = intent.getIntExtra("os", 0)
+        val rentOs = intent.getStringExtra("os")
         val rentDate = intent.getStringExtra("date")
         val rentCateory = if (rentDevice == 0) {
             "노트북"

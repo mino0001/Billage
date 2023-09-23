@@ -85,6 +85,53 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
+
+        val categoryDataProcessor = DataprocessCategoryAll()
+        categoryDataProcessor.requestDataFromWebsite { categoryDataList ->
+            // 가져온 카테고리 데이터에서 이름만 추출하여 categoryArray에 추가합니다.
+            categoryArray = categoryDataList.map { it.c_name }.toTypedArray()
+
+            // 나머지 초기화 코드를 실행합니다.
+            count = 0
+            buttonFlag = 0
+            loginFlag = 0
+            goodsAdapter = GoodsAdapter(goodsList)
+
+            // 화면을 초기화합니다.
+            initRecycler()
+            setupCategorySpinnerHandler()
+
+        }
+
+        val dataProcessor = DataprocessDeviceAll()
+
+        dataProcessor.requestDataFromWebsite { deviceDataList ->
+            // 가져온 deviceDataList를 활용하여 goodsList를 업데이트합니다.
+            goodsList.clear() // 기존 데이터를 초기화합니다.
+
+            // deviceDataList를 순회하면서 Goods 객체를 생성하고 goodsList에 추가합니다.
+            deviceDataList.forEachIndexed { index, device ->
+
+                val d_state = device.d_state?.toIntOrNull() ?: 0
+                val d_token = device.d_token?.toIntOrNull() ?: 0
+
+                val goods = Goods(
+                    device.d_id ?: "",  // d_id
+                    R.drawable.icon_laptop,  // 이미지 리소스 ID (임시로 노트북 이미지를 사용하겠습니다.)
+                    device.d_name ?: "",  // d_name
+                    device.d_model ?: "",  // d_model
+                    device.d_info ?: "",  // d_info
+                    d_state,  // d_state (null이면 0으로 처리)
+                    device.c_name ?: "",  // c_name
+                    device.c_id ?: "", //c_id
+                    d_token,  // d_token (null이면 0으로 처리)
+                    false  // is_checked (초기값은 false)
+                )
+                goodsList.add(goods)  // 생성한 Goods 객체를 goodsList에 추가합니다.
+            }
+
+            goodsAdapter.notifyDataSetChanged()  // RecyclerView를 갱신합니다.
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -132,7 +179,7 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding!!.spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
 
-                if(count==0){
+                /*if(count==0){
                     count++
                     goodsList.apply {
                         add(Goods(1,R.drawable.icon_laptop, "sm-12wq31", "more_1", "노트북",0,false))
@@ -144,7 +191,7 @@ class HomeFragment : Fragment() {
                         add(Goods(7,R.drawable.icon_laptop, "sm-12wq37", "more_7", "노트북",2,false))
                         add(Goods(8,R.drawable.icon_laptop, "sm-12wq38", "more_8", "노트북",1,false))
                     }
-                }
+                }*/
 
 
                 if(fragmentHomeBinding!!.spinnerCategory.getItemAtPosition(position).equals("전체")){
