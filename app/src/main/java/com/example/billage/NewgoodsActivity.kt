@@ -19,7 +19,7 @@ class NewgoodsActivity : ComponentActivity(){
     private fun addNftItem() {
         binding.btnNewSubmit.setOnClickListener {
             //예시. 생성하기에서 입력받은 데이터 리사이클러 뷰에 추가
-            goodsList.add(Goods(1,R.drawable.icon_nft2, "NFT1", "more_1", "카테고리1",0,false))
+
         }
     }
 
