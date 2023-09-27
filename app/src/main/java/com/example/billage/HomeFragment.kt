@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.Intent
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +32,7 @@ class HomeFragment : Fragment() {
     //뷰가 사라질 때 즉 메모리에서 날라갈 때 같이 날리기 위해 따로 빼두기
     private var fragmentHomeBinding : FragmentHomeBinding? =null
     private var intent :Intent? = null
+    private var searchView: SearchView? = null
     companion object {
         const val TAG : String = "로그"
 
@@ -53,6 +56,23 @@ class HomeFragment : Fragment() {
         setupCategorySpinnerHandler()
         buttonFlag=0
 
+        searchView = fragmentHomeBinding!!.toolbar.findViewById(R.id.btn_tb_search)
+
+        searchView!!.setOnQueryTextListener(searchViewTextListener)
+
+
+
+        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                goodsAdapter.filter.filter(newText)
+                return true
+            }
+        })
+
 
         fragmentHomeBinding!!.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -62,30 +82,34 @@ class HomeFragment : Fragment() {
 
                     true
                 }
-                R.id.btn_tb_noti -> {
-                    intent = Intent(context, NotiActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
+//                R.id.btn_tb_noti -> {
+//                    intent = Intent(context, NotiActivity::class.java)
+//                    startActivity(intent)
+//                    true
+//                }
                 R.id.tb_nft_new -> { //등록
                     intent = Intent(context, Send2Activity::class.java)
                     startActivity(intent)
                     true
                 }
-//                R.id.tb_nft_send -> { //대여
-//                    intent = Intent(context, Send2Activity::class.java)
-//                    startActivity(intent)
-//                    true
-//                }
-//                R.id.tb_category_edit -> { //반납
-//                    intent = Intent(context, MainActivity::class.java)
-//                    startActivity(intent)
-//                    true
-//                }
                 else -> false
             }
         }
     }
+
+    var searchViewTextListener: SearchView.OnQueryTextListener =
+        object : SearchView.OnQueryTextListener {
+            //검색버튼 입력시 호출, 검색버튼이 없으므로 사용하지 않음
+            override fun onQueryTextSubmit(s: String): Boolean {
+                return false
+            }
+
+            //텍스트 입력/수정시에 호출
+            override fun onQueryTextChange(s: String): Boolean {
+                goodsAdapter.filter.filter(s)
+                return false
+            }
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -114,8 +138,6 @@ class HomeFragment : Fragment() {
     }
 
     fun initRecycler(){
-
-
         fragmentHomeBinding!!.rvNftList.setHasFixedSize(true)
         val dividerItemDecoration =
             DividerItemDecoration(fragmentHomeBinding!!.rvNftList.context, LinearLayoutManager(context).orientation)
