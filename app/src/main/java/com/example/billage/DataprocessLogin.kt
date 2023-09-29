@@ -7,7 +7,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DataprocessRentalAll() {
+class DataprocessLogin(private val u_id: String, private val u_pw: String) {
     private val retrofit: Retrofit
 
     init {
@@ -17,21 +17,23 @@ class DataprocessRentalAll() {
             .build()
     }
 
-    fun requestDataFromWebsite(callback: (List<Rental>) -> Unit) {
+    fun requestLoginData(callback: (User?) -> Unit) {
         val service = retrofit.create(ApiService::class.java)
-        val call = service.getRentalData()
+        val call = service.getUserData(u_id, u_pw)
 
-        call.enqueue(object : Callback<List<Rental>> {
-            override fun onResponse(call: Call<List<Rental>>, response: Response<List<Rental>>) {
+        call.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val result = response.body()
-                    callback(result ?: emptyList())
+                    callback(result)
                 } else {
+                    callback(null) // 로그인 실패 시 null을 전달
                     Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
                 }
             }
 
-            override fun onFailure(call: Call<List<Rental>>, t: Throwable) {
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                callback(null) // 로그인 실패 시 null을 전달
                 Log.e("Response", "Error: ${t.message}")
             }
         })
