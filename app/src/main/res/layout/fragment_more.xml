@@ -56,7 +56,10 @@
             android:layout_height="wrap_content"
             android:text="예약 현황"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="25sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
             android:textStyle="bold" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="지갑주소"
+                android:text="2023/09/27 예약 완료"
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end"
@@ -84,9 +87,11 @@
                 android:id="@+id/tv_status_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이메일"
+                android:text="예약완료"
+                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="25sp"
+
                 app:layout_constraintStart_toStartOf="@+id/tv_status_more"
                 app:layout_constraintTop_toTopOf="@+id/iv_status" />
 
@@ -94,23 +99,43 @@
                 android:id="@+id/iv_status"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/icon_user"
+                android:src="@drawable/icon_checked"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-        <TextView
-            android:id="@+id/tv_terms_2"
+        <Button
+            android:id="@+id/btn_cancel_reserve"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
+            android:text="예약 취소"
+            android:textStyle="bold"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
-            android:text="개인정보 처리방침"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_marginEnd="40dp"
+            android:padding="5dp"
+            android:textSize="25sp"
+            android:textColor="#DB4F52"
+            />
+
+
+
+        <Button
+            android:id="@+id/btn_rent_detail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/zxing_transparent"
+            android:textColor="#62953C"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="> 예약내역 상세보기"
+            />
+
 
 
 
@@ -130,11 +155,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="5dp"
             android:text="내 정보"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -165,6 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="김눈송"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/tv_more_user_address"
@@ -181,21 +208,36 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/tv_show_user"
+<!--        <TextView-->
+<!--            android:id="@+id/tv_show_user"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="> 비밀번호 변경하기"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:focusableInTouchMode="true"/>-->
+
+        <Button
+            android:id="@+id/btn_change_pw"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="8dp"
-            android:text="> My QR 보기"
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:background="@color/zxing_transparent"
+            android:textColor="#62953C"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
+            android:textSize="25sp"
+            android:text="> 비밀번호 변경하기"
+            />
+
 
     </LinearLayout>
 
@@ -215,7 +257,9 @@
             android:layout_height="wrap_content"
             android:text="알림 설정"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <Switch
@@ -223,6 +267,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
             android:text="푸시 알림"
             android:textSize="24sp"/>
 

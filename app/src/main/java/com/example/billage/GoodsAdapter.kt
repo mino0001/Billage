@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.billage.databinding.ListItemBinding
 import java.util.Locale
 
-private val wholeList : MutableList<Goods> = goodsList
+//private val wholeList : MutableList<Goods> = goodsList
 
 class GoodsAdapter(var goodsList: MutableList<Goods>) : RecyclerView.Adapter<GoodsViewHolder>(),
     Filterable {
@@ -55,7 +55,7 @@ class GoodsAdapter(var goodsList: MutableList<Goods>) : RecyclerView.Adapter<Goo
             //공백제외 아무런 값이 없을 경우 -> 원본 배열
             if (filterString.isEmpty()) {
                 results.values = wholeList
-                results.count = wholeList.size
+                //results.count = wholeList.size
                 //results.count = goodsList.size
                 //filteredList.clear()
 //                filteredList.addAll(wholeList)
@@ -68,11 +68,11 @@ class GoodsAdapter(var goodsList: MutableList<Goods>) : RecyclerView.Adapter<Goo
 //                        filteredList.add(goods)
 //                    }
 //                }
-                val filteredList = wholeList.filter { goods ->
-                    goods.alias.lowercase(Locale.ROOT).contains(filterString.lowercase(Locale.ROOT))
+                val filteredList = goodsList.filter { goods ->
+                    goods.name.lowercase(Locale.ROOT).contains(filterString.lowercase(Locale.ROOT))
                 }
                 results.values = filteredList
-                results.count = filteredList.size
+                //results.count = filteredList.size
                 //results.count = filteredList.size
             }
 
@@ -95,7 +95,7 @@ class GoodsAdapter(var goodsList: MutableList<Goods>) : RecyclerView.Adapter<Goo
 //            filteredList.addAll(goodsList)
 //            notifyDataSetChanged()
 
-            if (results != null) {
+            if (results != null && results.values != null) {
                 goodsList.clear()
                 goodsList.addAll(results.values as MutableList<Goods>)
             }else {

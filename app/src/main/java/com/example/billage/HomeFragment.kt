@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -20,6 +19,7 @@ import com.example.billage.databinding.FragmentHomeBinding
 
 
 var goodsList = mutableListOf<Goods>()
+var wholeList = mutableListOf<Goods>()
 var categoryArray = arrayOf("노트북","태블릿pc")
 var count = 0
 var buttonFlag = 0
@@ -87,11 +87,7 @@ class HomeFragment : Fragment() {
 //                    startActivity(intent)
 //                    true
 //                }
-                R.id.tb_nft_new -> { //등록
-                    intent = Intent(context, Send2Activity::class.java)
-                    startActivity(intent)
-                    true
-                }
+
                 else -> false
             }
         }
@@ -139,6 +135,8 @@ class HomeFragment : Fragment() {
                 )
                 goodsList.add(goods)  // 생성한 Goods 객체를 goodsList에 추가합니다.
             }
+
+            wholeList = goodsList
 
             goodsAdapter.notifyDataSetChanged()  // RecyclerView를 갱신합니다.
         }
@@ -220,7 +218,7 @@ class HomeFragment : Fragment() {
                     goodsAdapter=GoodsAdapter(goodsList)
                 }
                 else {
-                    val filteredList = goodsList.filter { it.category == fragmentHomeBinding!!.spinnerCategory.getItemAtPosition(position)}
+                    val filteredList = goodsList.filter { it.c_name == fragmentHomeBinding!!.spinnerCategory.getItemAtPosition(position)}
                     goodsAdapter =GoodsAdapter(filteredList.toMutableList())
                 }
 

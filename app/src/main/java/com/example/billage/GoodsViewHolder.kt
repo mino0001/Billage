@@ -20,13 +20,13 @@ class GoodsViewHolder (val binding: ListItemBinding)
 
         binding.ivItem.setImageResource(data.img_goods)
 
-        if (data.alias!!.isEmpty()){
-            binding.tvItemId.text = data.more
+        if (data.name!!.isEmpty()){
+            binding.tvItemId.text = data.model
             binding.tvItemMore.text = ""
 
         }else{
-            binding.tvItemId.text = data.alias
-            binding.tvItemMore.text =data.more
+            binding.tvItemId.text = data.name
+            binding.tvItemMore.text =data.model
         }
 
 

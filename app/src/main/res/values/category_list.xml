@@ -4,8 +4,8 @@
     <item>전체</item>
     <item>i5</item>
     <item>i7</item>
-    <item>맥북</item>
-    <item>아이패드</item>
-    <item>삼성태블릿</item>
+    <item>macOS</item>
+    <item>android</item>
+    <item>ios</item>
 </string-array>
 </resources>

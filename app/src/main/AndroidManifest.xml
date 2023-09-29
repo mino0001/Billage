@@ -29,6 +29,11 @@
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.billage" />
         <activity
+            android:name=".ChpwdActivity"
+            android:exported="false"
+            android:label="@string/title_activity_chpwd"
+            android:theme="@style/Theme.billage" />
+        <activity
             android:name=".SignupActivity"
             android:exported="false"
             android:label="@string/title_activity_signup"

@@ -115,16 +115,16 @@ class RentFragment : Fragment() {
             val rgp2Checked = radioGp2.checkedRadioButtonId
             val rgp3Checked = radioGp3.checkedRadioButtonId
 
-            var option1=rgp1Checked
-            var option2=0
+            var option1=rgp1Checked //노트북, 태블릿PC
+            var option2=0 //os
 
             if (rgp1Checked==R.id.rbtn_laptop){// 노트북
                 option1=0
                 if (rgp2Checked==R.id.rbtn_macos){
                     option2=0
-                }else if (rgp2Checked==R.id.rbtn_windows){
+                }else if (rgp2Checked==R.id.rbtn_i5){
                     option2=1
-                }else if (rgp2Checked==R.id.rbtn_etc){
+                }else if (rgp2Checked==R.id.rbtn_i7){
                     option2=2
                 }
             }
