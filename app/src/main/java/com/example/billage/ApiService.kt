@@ -19,7 +19,10 @@ interface ApiService {
     fun getRentalData(@Query("u_id") u_id: String): Call<List<Rental>>
 
     @GET("api/getUserData.php") // User 데이터 불러오기
-    fun getUserData(@Query("u_id") u_id: String, @Query("u_pw") u_pw: String): Call<User>
+    fun getUserData(
+        @Query("u_id") u_id: String,
+        @Query("u_pw") u_pw: String
+    ): Call<User>
 
     @GET("api/getDeviceAvailableData.php") // 대여 가능 기기 정보 불러오기
     fun getDeviceAvailableData(

@@ -85,7 +85,7 @@ class MoreFragment : Fragment() {
 
         btnDetailReserve.setOnClickListener{
 
-            val intent = Intent(context, RentDetailActivity::class.java)
+            val intent = Intent(context, MainActivity::class.java)
 
             startActivity(intent)
         }
