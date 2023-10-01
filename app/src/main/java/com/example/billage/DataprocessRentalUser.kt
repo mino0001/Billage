@@ -7,7 +7,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DataprocessRentalAll() {
+class DataprocessRentalUser(private val u_id: String) {
     private val retrofit: Retrofit
 
     init {
@@ -17,9 +17,9 @@ class DataprocessRentalAll() {
             .build()
     }
 
-    fun requestDataFromWebsite(callback: (List<Rental>) -> Unit) {
+    fun requestDataForUser(callback: (List<Rental>) -> Unit) {
         val service = retrofit.create(ApiService::class.java)
-        val call = service.getRentalData()
+        val call = service.getRentalData(u_id)
 
         call.enqueue(object : Callback<List<Rental>> {
             override fun onResponse(call: Call<List<Rental>>, response: Response<List<Rental>>) {

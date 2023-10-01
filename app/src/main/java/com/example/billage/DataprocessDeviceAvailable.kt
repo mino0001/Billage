@@ -7,7 +7,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DataprocessRentalAll() {
+class DataprocessDeviceAvailable(private val category_id: String, private val rental_start: String, private val rental_deadline: String) {
     private val retrofit: Retrofit
 
     init {
@@ -17,21 +17,23 @@ class DataprocessRentalAll() {
             .build()
     }
 
-    fun requestDataFromWebsite(callback: (List<Rental>) -> Unit) {
+    fun requestDeviceAvailableData(callback: (List<Device>?) -> Unit) {
         val service = retrofit.create(ApiService::class.java)
-        val call = service.getRentalData()
+        val call = service.getDeviceAvailableData(category_id, rental_start, rental_deadline)
 
-        call.enqueue(object : Callback<List<Rental>> {
-            override fun onResponse(call: Call<List<Rental>>, response: Response<List<Rental>>) {
+        call.enqueue(object : Callback<List<Device>> {
+            override fun onResponse(call: Call<List<Device>>, response: Response<List<Device>>) {
                 if (response.isSuccessful) {
                     val result = response.body()
-                    callback(result ?: emptyList())
+                    callback(result)
                 } else {
+                    callback(null) // 데이터 가져오기 실패 시 null을 전달
                     Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
                 }
             }
 
-            override fun onFailure(call: Call<List<Rental>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Device>>, t: Throwable) {
+                callback(null) // 데이터 가져오기 실패 시 null을 전달
                 Log.e("Response", "Error: ${t.message}")
             }
         })
