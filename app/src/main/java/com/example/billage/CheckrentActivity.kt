@@ -25,7 +25,9 @@ class CheckrentActivity : ComponentActivity() {
 
         val rentDevice = intent.getIntExtra("device",0)
         val rentOs = intent.getIntExtra("os",0)
-        val rentDate = intent.getStringExtra("date")
+        val rentDate = intent.getStringExtra("rentDate")
+        val returnDate = intent.getStringExtra("returnDate")
+
         val rentCateory = if (rentDevice == 0) {
             //노트북
             if(rentOs == 0 ){
@@ -48,6 +50,9 @@ class CheckrentActivity : ComponentActivity() {
         binding!!.rvList.adapter = GoodsAdapter(filteredList.toMutableList())
         binding!!.rvList.setHasFixedSize(true)
 
+        /**
+         * 사용자가 이미 대여한 기기가 없을 경우에만 buttonFlag = 1
+         */
         buttonFlag=1
 
 

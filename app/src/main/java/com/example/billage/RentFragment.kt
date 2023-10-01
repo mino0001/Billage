@@ -8,11 +8,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.billage.databinding.FragmentRentBinding
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 class RentFragment : Fragment() {
@@ -46,8 +50,10 @@ class RentFragment : Fragment() {
         val radioLp = fragmentRentBinding!!.rbtnLaptop
         val radioTpc = fragmentRentBinding!!.rbtnTablet
         val tvQst3 = fragmentRentBinding!!.tvQuestion3
-        val etDate = fragmentRentBinding!!.etRentDate
+        var rentDate = fragmentRentBinding!!.etRentDate.text.toString()
+        var returnDate = fragmentRentBinding!!.etReturnDate.text.toString()
         val btnRent = fragmentRentBinding!!.btnRentAvailable
+
 
         val constraintLayout: ConstraintLayout = fragmentRentBinding!!.layout
         val constraintSet = ConstraintSet()
@@ -108,44 +114,55 @@ class RentFragment : Fragment() {
     }
 
         btnRent.setOnClickListener{
+            rentDate = fragmentRentBinding!!.etRentDate.text.toString()
+            returnDate = fragmentRentBinding!!.etReturnDate.text.toString()
 
-            // 체크된 값, 대여일 기준으로 대여 가능한 기기 조회
 
-            val rgp1Checked = radioGp1.checkedRadioButtonId
-            val rgp2Checked = radioGp2.checkedRadioButtonId
-            val rgp3Checked = radioGp3.checkedRadioButtonId
+            if (isDateFormatValid(rentDate) && isDateFormatValid(returnDate)) {
+                // 유효한 날짜 형식인 경우
+                showToast("유효한 날짜 형식입니다.")
+                // 체크된 값, 대여일 기준으로 대여 가능한 기기 조회
+                val rgp1Checked = radioGp1.checkedRadioButtonId
+                val rgp2Checked = radioGp2.checkedRadioButtonId
+                val rgp3Checked = radioGp3.checkedRadioButtonId
 
-            var option1=rgp1Checked //노트북, 태블릿PC
-            var option2=0 //os
+                var option1=rgp1Checked //노트북, 태블릿PC
+                var option2=0 //os
 
-            if (rgp1Checked==R.id.rbtn_laptop){// 노트북
-                option1=0
-                if (rgp2Checked==R.id.rbtn_macos){
-                    option2=0
-                }else if (rgp2Checked==R.id.rbtn_i5){
-                    option2=1
-                }else if (rgp2Checked==R.id.rbtn_i7){
-                    option2=2
+                if (rgp1Checked==R.id.rbtn_laptop){// 노트북
+                    option1=0
+                    if (rgp2Checked==R.id.rbtn_macos){
+                        option2=0
+                    }else if (rgp2Checked==R.id.rbtn_i5){
+                        option2=1
+                    }else if (rgp2Checked==R.id.rbtn_i7){
+                        option2=2
+                    }
                 }
-            }
-            else if (rgp1Checked==R.id.rbtn_tablet){ //태블릿 PC
-                option1=1
-                if (rgp2Checked==R.id.rbtn_ios){
-                    option2=0
-                }else if (rgp2Checked==R.id.rbtn_android){
-                    option2=1
+                else if (rgp1Checked==R.id.rbtn_tablet){ //태블릿 PC
+                    option1=1
+                    if (rgp3Checked==R.id.rbtn_ios){
+                        option2=0
+                    }else if (rgp3Checked==R.id.rbtn_android){
+                        option2=1
+                    }
                 }
+
+
+                val intent = Intent(context, CheckrentActivity::class.java)
+                // 정보 넘겨주기
+                intent.putExtra("device", option1)
+                intent.putExtra("os", option2)
+                intent.putExtra("rentDate", rentDate)
+                intent.putExtra("returnDate", rentDate)
+
+
+                startActivity(intent)
+            } else {
+                // 유효하지 않은 날짜 형식인 경우
+                showToast("유효하지 않은 날짜 형식입니다.")
             }
 
-
-            val intent = Intent(context, CheckrentActivity::class.java)
-            // 정보 넘겨주기
-            intent.putExtra("device", option1)
-            intent.putExtra("os", option2)
-            intent.putExtra("date", etDate.text)
-
-
-            startActivity(intent)
 
 
         }
@@ -179,6 +196,22 @@ class RentFragment : Fragment() {
     override fun onDestroyView() {
         fragmentRentBinding = null
         super.onDestroyView()
+    }
+
+    private fun isDateFormatValid(date: String): Boolean {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        dateFormat.isLenient = false
+
+        try {
+            val parsedDate = dateFormat.parse(date)
+            return parsedDate != null
+        } catch (e: ParseException) {
+            return false
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
 

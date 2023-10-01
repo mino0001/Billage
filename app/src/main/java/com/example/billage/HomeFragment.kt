@@ -19,7 +19,6 @@ import com.example.billage.databinding.FragmentHomeBinding
 
 
 var goodsList = mutableListOf<Goods>()
-var wholeList = mutableListOf<Goods>()
 var categoryArray = arrayOf("노트북","태블릿pc")
 var count = 0
 var buttonFlag = 0
@@ -61,17 +60,6 @@ class HomeFragment : Fragment() {
         searchView!!.setOnQueryTextListener(searchViewTextListener)
 
 
-
-        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                goodsAdapter.filter.filter(newText)
-                return true
-            }
-        })
 
 
         fragmentHomeBinding!!.toolbar.setOnMenuItemClickListener {
@@ -120,23 +108,56 @@ class HomeFragment : Fragment() {
 
                 val d_state = device.d_state?.toIntOrNull() ?: 0
                 val d_token = device.d_token?.toIntOrNull() ?: 0
+                val deviceCategory = device.c_name
 
-                val goods = Goods(
-                    device.d_id ?: "",  // d_id
-                    R.drawable.icon_laptop,  // 이미지 리소스 ID (임시로 노트북 이미지를 사용하겠습니다.)
-                    device.d_name ?: "",  // d_name
-                    device.d_model ?: "",  // d_model
-                    device.d_info ?: "",  // d_info
-                    d_state,  // d_state (null이면 0으로 처리)
-                    device.c_name ?: "",  // c_name
-                    device.c_id ?: "", //c_id
-                    d_token,  // d_token (null이면 0으로 처리)
-                    false  // is_checked (초기값은 false)
-                )
-                goodsList.add(goods)  // 생성한 Goods 객체를 goodsList에 추가합니다.
+                 if( deviceCategory == "android"){
+                     val goods = Goods(
+                         device.d_id ?: "",  // d_id
+                         R.drawable.icon_tablet,  // 이미지 리소스 ID (임시로 노트북 이미지를 사용하겠습니다.)
+                         device.d_name ?: "",  // d_name
+                         device.d_model ?: "",  // d_model
+                         device.d_info ?: "",  // d_info
+                         d_state,  // d_state (null이면 0으로 처리)
+                         device.c_name ?: "",  // c_name
+                         device.c_id ?: "", //c_id
+                         d_token,  // d_token (null이면 0으로 처리)
+                         false  // is_checked (초기값은 false)
+                     )
+                     goodsList.add(goods)  // 생성한 Goods 객체를 goodsList에 추가합니다.
+
+                 }else if (deviceCategory == "ios"){
+                     val goods = Goods(
+                         device.d_id ?: "",  // d_id
+                         R.drawable.icon_tablet,  // 이미지 리소스 ID (임시로 노트북 이미지를 사용하겠습니다.)
+                         device.d_name ?: "",  // d_name
+                         device.d_model ?: "",  // d_model
+                         device.d_info ?: "",  // d_info
+                         d_state,  // d_state (null이면 0으로 처리)
+                         device.c_name ?: "",  // c_name
+                         device.c_id ?: "", //c_id
+                         d_token,  // d_token (null이면 0으로 처리)
+                         false  // is_checked (초기값은 false)
+                     )
+                     goodsList.add(goods)  // 생성한 Goods 객체를 goodsList에 추가합니다.
+
+                 }else {
+                     val goods = Goods(
+                         device.d_id ?: "",  // d_id
+                         R.drawable.icon_laptop,  // 이미지 리소스 ID (임시로 노트북 이미지를 사용하겠습니다.)
+                         device.d_name ?: "",  // d_name
+                         device.d_model ?: "",  // d_model
+                         device.d_info ?: "",  // d_info
+                         d_state,  // d_state (null이면 0으로 처리)
+                         device.c_name ?: "",  // c_name
+                         device.c_id ?: "", //c_id
+                         d_token,  // d_token (null이면 0으로 처리)
+                         false  // is_checked (초기값은 false)
+                     )
+                     goodsList.add(goods)  // 생성한 Goods 객체를 goodsList에 추가합니다.
+                 }
+
             }
 
-            wholeList = goodsList
 
             goodsAdapter.notifyDataSetChanged()  // RecyclerView를 갱신합니다.
         }
