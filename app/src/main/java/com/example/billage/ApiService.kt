@@ -1,5 +1,6 @@
 package com.example.billage
 
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -28,6 +29,16 @@ interface ApiService {
         @Field("u_id") u_id: String,
         @Field("u_pw") u_pw: String
     ): Call<User>
+
+    @FormUrlEncoded
+    @POST("api/saveUserNew.php")
+    fun saveUserNew(
+        @Field("u_id") u_id: String,
+        @Field("u_pwd") u_pwd: String,
+        @Field("u_name") u_name: String,
+        @Field("u_phone") u_phone: String,
+        @Field("u_email") u_email: String
+    ): Call<String>
 
     @GET("api/getDeviceAvailableData.php") // 대여 가능 기기 정보 불러오기
     fun getDeviceAvailableData(
