@@ -27,23 +27,25 @@ class GoodsinfoActivity : ComponentActivity(){
 
         val data = intent.getParcelableExtra("data", Goods::class.java)
 
-        binding!!.tvInfoTitle.text = data!!.alias //변경하기**, 주소, 시각, 보낸 사람, 해시 등
+        binding!!.tvInfoTitle.text = data!!.name //변경하기**, 제조사, 모덺명ㅇ, cpu, 운영체제ㅇ, ssd, ram
+        binding!!.tvModel.text = data!!.model
+        binding!!.tvDetailInfo.text = data!!.more
+//        binding!!.tvRentNum.text = data!!.
+
+
+
         binding!!.btnBack.setOnClickListener{
             finish()
-            //intent = Intent(this, MainActivity::class.java)
-            //startActivity(intent)
         }
         if (buttonFlag==0){
             binding!!.btnSubmit.isEnabled = false //비활성화
             binding!!.btnSubmit.visibility= View.GONE
         } else {
             binding!!.btnSubmit.setOnClickListener{
-                //binding!!.nftcategory.toString()
 
                 showRentConfirmationDialog()
 
 
-//            카테고리 설정, 별명 -> 처리
             }
         }
 

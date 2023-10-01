@@ -11,6 +11,7 @@
     <string name="title_activity_send2">Send2Activity</string>
     <string name="title_activity_moreinfo">MoreinfoActivity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_chpwd">ChpwdActivity</string>
     <string name="title_activity_signup">SignupActivity</string>
     <string name="title_activity_checkrent">CheckrentActivity</string>
 

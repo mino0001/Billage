@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
-import com.example.billage.MainActivity
-import com.example.billage.SignupActivity
 import com.example.billage.databinding.ActivityLoginBinding
 
 

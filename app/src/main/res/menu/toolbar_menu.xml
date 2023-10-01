@@ -6,17 +6,20 @@
         android:title="사용자정보"
         android:icon="@drawable/icon_user"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/btn_tb_noti"
-        android:title="알림"
-        android:icon="@drawable/icon_noti"
-        app:showAsAction="always" />
+
 <!--    <item-->
 <!--        android:id="@+id/btn_tb_search"-->
 <!--        android:title="검색"-->
 <!--        android:icon="@drawable/ic_menu_search"-->
 <!--        app:showAsAction="always"-->
 <!--        />-->
+    <item
+        android:id="@+id/btn_tb_search"
+        android:icon="@drawable/icon_search"
+        android:title="Search"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView" />
+
     <group
         android:id="@+id/btn_tb_more"
         >

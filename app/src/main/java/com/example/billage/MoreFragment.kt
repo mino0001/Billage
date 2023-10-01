@@ -2,14 +2,19 @@ package com.example.billage
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.billage.databinding.FragmentMoreBinding
+import com.example.billage.databinding.FragmentRentBinding
 
 class MoreFragment : Fragment() {
+
+    private var fragmentMoreBinding : FragmentMoreBinding? =null
 
     companion object {
         const val TAG : String = "로그"
@@ -43,9 +48,38 @@ class MoreFragment : Fragment() {
 
         Log.d(TAG, "ProfileFragment - onCreateView() called")
 
-        val view = inflater.inflate(R.layout.fragment_more, container, false)
+        val binding : FragmentMoreBinding = FragmentMoreBinding.inflate(inflater,container,false)
+        fragmentMoreBinding = binding
 
-        return view
+        return fragmentMoreBinding!!.root
+
+        /***
+         *  사용자가 대여한 제품 -> 예약 현황
+         *
+         *  state 어떻게 분류하는지
+         *
+         */
+
+
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //val btnCancelReserve = fragmentMoreBinding!!.btnCancelReserve
+//        val btnDetailReserve = fragmentMoreBinding!!.btnRentDetail
+//        val btnChgPwd = fragmentMoreBinding!!.btnChangePw
+
+        fragmentMoreBinding!!.btnChangePw.setOnClickListener(){
+
+            val intent = Intent(context, ChpwdActivity::class.java)
+
+            startActivity(intent)
+
+        }
+
+
     }
 
 

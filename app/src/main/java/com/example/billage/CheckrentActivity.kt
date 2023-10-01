@@ -24,15 +24,25 @@ class CheckrentActivity : ComponentActivity() {
 
 
         val rentDevice = intent.getIntExtra("device",0)
-        val rentOs = intent.getStringExtra("os")
+        val rentOs = intent.getIntExtra("os",0)
         val rentDate = intent.getStringExtra("date")
         val rentCateory = if (rentDevice == 0) {
-            "노트북"
+            //노트북
+            if(rentOs == 0 ){
+                "macOS"
+            } else if ( rentOs == 1){
+                "i5"
+            } else{
+                "i7"
+            }
         } else {
-            "태블릿pc"
+            //태블릿pc
+            if(rentOs == 0) "ios"
+            else "android"
         }
 
-        val filteredList = goodsList.filter { it.category == rentCateory} .filter { it.os == rentOs }
+        val filteredList = goodsList.filter { it.c_name == rentCateory}
+            //.filter { it.c_id == rentOs }
 
         binding!!.rvList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
         binding!!.rvList.adapter = GoodsAdapter(filteredList.toMutableList())

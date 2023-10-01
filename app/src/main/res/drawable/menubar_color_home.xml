@@ -6,7 +6,7 @@
         android:state_selected="false"/>
     <item
         android:state_selected="true"
-        android:drawable="@drawable/icon_selected_home" />
+        android:drawable="@drawable/icon_home_checked" />
 
 
 </selector>

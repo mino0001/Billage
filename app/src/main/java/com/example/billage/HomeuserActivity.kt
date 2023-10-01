@@ -18,12 +18,7 @@ class HomeuserActivity : ComponentActivity() {
             finish()
         }
 
-        binding!!.btnChangePw.setOnClickListener{
 
-
-
-
-        }
 
     }
 }

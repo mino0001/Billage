@@ -5,5 +5,5 @@
         android:state_selected="false"/>
     <item
         android:state_selected="true"
-        android:drawable="@drawable/icon_selected_more" />
+        android:drawable="@drawable/icon_more_checked" />
 </selector>

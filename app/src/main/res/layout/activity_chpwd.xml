@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_noti"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="10dp"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="?attr/actionBarTheme"
+        app:contentInsetStart="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="비밀번호 변경"
+                android:textColor="#2C3E50"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_border"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="새 비밀번호"
+                android:paddingStart="5dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_status"
+                app:layout_constraintStart_toEndOf="@+id/iv_status"
+                app:layout_constraintTop_toBottomOf="@+id/tv_status_title" />
+
+
+            <EditText
+                android:id="@+id/et_chg_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="새 비밀번호"
+                android:paddingStart="5dp"
+                android:inputType="textPassword"
+                android:background="@drawable/edittext_border"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@id/tv_question3"
+                app:layout_constraintEnd_toEndOf="@id/tv_question3"
+                app:layout_constraintTop_toBottomOf="@id/tv_question3"
+                />
+        <EditText
+            android:id="@+id/et_chg_pwd_check"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="새 비밀번호 확인"
+            android:paddingStart="5dp"
+
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_border"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tv_question3"
+            app:layout_constraintEnd_toEndOf="@id/tv_question3"
+            app:layout_constraintTop_toBottomOf="@id/tv_question3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
+            android:text="현재 비밀번호"
+            android:paddingStart="5dp"
+
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_status"
+            app:layout_constraintStart_toEndOf="@+id/iv_status"
+            app:layout_constraintTop_toBottomOf="@+id/tv_status_title" />
+
+
+        <EditText
+            android:id="@+id/et_pwd_ex"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="현재 비밀번호"
+            android:paddingStart="5dp"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_border"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tv_question3"
+            app:layout_constraintEnd_toEndOf="@id/tv_question3"
+            app:layout_constraintTop_toBottomOf="@id/tv_question3"
+            />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="비밀번호 변경"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="10dp"
+            android:padding="5dp"
+            android:textSize="25sp"
+            android:textColor="#DB4F52"
+            />
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

@@ -62,26 +62,10 @@
         android:layout_height="wrap_content"
         android:text="sm-aw123dw"
         android:textColor="@color/black"
-        android:textSize="50sp"
+        android:textSize="40sp"
         android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="제조사"
-        android:textSize="24sp"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/nftName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:text="삼성전자"
-        android:layout_marginTop="5dp"
-        android:textStyle="bold"
-        android:inputType="textPersonName" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,7 +75,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_info_address"
+        android:id="@+id/tv_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="NT950XEE-X71A"
@@ -99,65 +83,41 @@
         android:textSize="24sp"
         android:textStyle="bold"
         />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="cpu"
         android:layout_marginTop="5dp"
+        android:text="상세정보"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_info_trans_time"
+        android:id="@+id/tv_detail_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="코어i7-1260P"
+        android:layout_height="150dp"
+        android:text=" "
+        android:background="@drawable/edittext_border"
         android:layout_marginTop="5dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        />
+        android:padding="5dp"/>
+
+
+
+
+
 
     <TextView
-        android:id="@+id/tv_info_sender"
+        android:id="@+id/tv_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="보낸 사람"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/tv_info_hash"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ssd"
+        android:text="대여 횟수"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
-
     <TextView
-        android:id="@+id/tv_info_trans_hash"
+        android:id="@+id/tv_rent_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="512GB"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="램"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/tv_info_ram"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="16GB"
+        android:text="5"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>

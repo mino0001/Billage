@@ -6,12 +6,12 @@ import android.os.Parcelable
 data class Goods(
     val id: String, //d_id
     var img_goods: Int,
-    var alias: String, //d_name
+    var name: String, //d_name
     var model: String, //d_model
     var more: String, //d_info
     var state: Int, //d_state
-    var category: String, //c_name
-    var os: String, //c_id
+    var c_name: String, //c_name
+    var c_id: String, //c_id
     var token: Int, //d_token
     var is_checked: Boolean
 ) : Parcelable {
@@ -31,12 +31,12 @@ data class Goods(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeInt(img_goods)
-        parcel.writeString(alias)
+        parcel.writeString(name)
         parcel.writeString(model)
         parcel.writeString(more)
         parcel.writeInt(state)
-        parcel.writeString(category)
-        parcel.writeString(os)
+        parcel.writeString(c_name)
+        parcel.writeString(c_id)
         parcel.writeInt(token)
         parcel.writeByte(if (is_checked) 1 else 0)
     }

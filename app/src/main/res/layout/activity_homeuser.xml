@@ -128,20 +128,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_home_id"
             app:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/btn_change_pw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@color/zxing_transparent"
-            android:onClick="onLoginClick"
-            android:textColor="#62953C"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="비밀번호 변경하기"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_user_id" />
 
 
         <!--        <ImageButton-->
