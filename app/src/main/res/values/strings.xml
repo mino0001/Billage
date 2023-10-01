@@ -4,7 +4,7 @@
     <string name="title_activity_goodsnft">GoodsnftActivity</string>
     <string name="title_activity_homeuser">HomeuserActivity</string>
     <string name="title_activity_category">CategoryActivity</string>
-    <string name="title_activity_noti">NotiActivity</string>
+    <string name="title_activity_rent_detail">RentDetailActivity</string>
     <string name="title_activity_edit">EditActivity</string>
     <string name="title_activity_edit2">Edit2Activity</string>
     <string name="title_activity_send">sendActivity</string>

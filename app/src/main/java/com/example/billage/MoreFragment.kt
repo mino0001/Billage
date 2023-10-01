@@ -67,16 +67,27 @@ class MoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //val btnCancelReserve = fragmentMoreBinding!!.btnCancelReserve
-//        val btnDetailReserve = fragmentMoreBinding!!.btnRentDetail
-//        val btnChgPwd = fragmentMoreBinding!!.btnChangePw
+        val btnCancelReserve = fragmentMoreBinding!!.btnCancelReserve
+        val btnDetailReserve = fragmentMoreBinding!!.btnRentDetail
+        val btnChgPwd = fragmentMoreBinding!!.btnChangePw
 
-        fragmentMoreBinding!!.btnChangePw.setOnClickListener(){
+        btnChgPwd.setOnClickListener(){
 
             val intent = Intent(context, ChpwdActivity::class.java)
 
             startActivity(intent)
 
+        }
+
+        btnCancelReserve.setOnClickListener{
+
+        }
+
+        btnDetailReserve.setOnClickListener{
+
+            val intent = Intent(context, RentDetailActivity::class.java)
+
+            startActivity(intent)
         }
 
 

@@ -38,15 +38,11 @@
             android:exported="false"
             android:label="@string/title_activity_signup"
             android:theme="@style/Theme.billage" />
+
         <activity
-            android:name=".Send2Activity"
+            android:name=".RentDetailActivity"
             android:exported="false"
-            android:label="@string/title_activity_send2"
-            android:theme="@style/Theme.billage" />
-        <activity
-            android:name=".NotiActivity"
-            android:exported="false"
-            android:label="@string/title_activity_noti"
+            android:label="@string/title_activity_rent_detail"
             android:theme="@style/Theme.billage" />
         <activity
             android:name=".EditCategoryActivity"
