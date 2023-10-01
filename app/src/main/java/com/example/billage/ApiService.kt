@@ -28,4 +28,12 @@ interface ApiService {
         @Query("rental_deadline") rental_deadline: String
     ): Call<List<Device>>
 
+    @GET("api/saveReserveNew.php") // 새로운 예약 저장하기
+    fun reserveNew(
+        @Query("user_id") user_id: String,
+        @Query("device_id") device_id: String,
+        @Query("rental_start") rental_start: String,
+        @Query("rental_deadline") rental_deadline: String
+    ): Call<String>
+
 }
