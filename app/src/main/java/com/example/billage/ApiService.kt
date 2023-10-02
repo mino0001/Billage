@@ -55,4 +55,10 @@ interface ApiService {
         @Query("rental_deadline") rental_deadline: String
     ): Call<String>
 
+    @FormUrlEncoded
+    @POST("api/saveReserveCancel.php")
+    fun saveReserveCancel(
+        @Field("rt_id") rt_id: String
+    ): Call<String>
+
 }
