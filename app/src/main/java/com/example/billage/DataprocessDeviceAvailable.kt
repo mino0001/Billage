@@ -7,7 +7,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DataprocessDeviceAvailable(private val category_id: String, private val rental_start: String, private val rental_deadline: String) {
+class DataprocessDeviceAvailable(
+    private val category_id: String,
+    private val rental_start: String,
+    private val rental_deadline: String
+) {
     private val retrofit: Retrofit
 
     init {

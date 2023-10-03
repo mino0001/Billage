@@ -29,6 +29,16 @@ interface ApiService {
         @Field("u_pw") u_pw: String
     ): Call<User>
 
+    @FormUrlEncoded
+    @POST("api/saveUserNew.php")
+    fun saveUserNew(
+        @Field("u_id") u_id: String,
+        @Field("u_pwd") u_pwd: String,
+        @Field("u_name") u_name: String,
+        @Field("u_phone") u_phone: String,
+        @Field("u_email") u_email: String
+    ): Call<String>
+
     @GET("api/getDeviceAvailableData.php") // 대여 가능 기기 정보 불러오기
     fun getDeviceAvailableData(
         @Query("category_id") category_id: String,
@@ -42,6 +52,12 @@ interface ApiService {
         @Query("device_id") device_id: String,
         @Query("rental_start") rental_start: String,
         @Query("rental_deadline") rental_deadline: String
+    ): Call<String>
+
+    @FormUrlEncoded
+    @POST("api/saveReserveCancel.php")
+    fun saveReserveCancel(
+        @Field("rt_id") rt_id: String
     ): Call<String>
 
 }

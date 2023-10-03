@@ -30,12 +30,9 @@ class LoginActivity : ComponentActivity() {
 
         //binding!!.btnSignup.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding!!.btnSignup.setOnClickListener(){
-
             intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
-
-
 
 
 
