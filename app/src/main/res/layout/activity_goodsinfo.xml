@@ -116,7 +116,7 @@
         android:id="@+id/tv_rent_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="5"
+        android:text="0 번"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
@@ -125,9 +125,10 @@
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
         android:background="@drawable/btn_border"
         android:text="대여하기"
         android:textColor="@color/white"

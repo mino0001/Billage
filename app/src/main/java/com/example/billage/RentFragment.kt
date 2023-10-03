@@ -50,8 +50,8 @@ class RentFragment : Fragment() {
         val radioLp = fragmentRentBinding!!.rbtnLaptop
         val radioTpc = fragmentRentBinding!!.rbtnTablet
         val tvQst3 = fragmentRentBinding!!.tvQuestion3
-        var rentDate = fragmentRentBinding!!.etRentDate.text.toString()
-        var returnDate = fragmentRentBinding!!.etReturnDate.text.toString()
+        var rentDate: String
+        var returnDate: String
         val btnRent = fragmentRentBinding!!.btnRentAvailable
 
 
@@ -120,31 +120,30 @@ class RentFragment : Fragment() {
 
             if (isDateFormatValid(rentDate) && isDateFormatValid(returnDate)) {
                 // 유효한 날짜 형식인 경우
-                showToast("유효한 날짜 형식입니다.")
+//                showToast("유효한 날짜 형식입니다.")
                 // 체크된 값, 대여일 기준으로 대여 가능한 기기 조회
                 val rgp1Checked = radioGp1.checkedRadioButtonId
                 val rgp2Checked = radioGp2.checkedRadioButtonId
                 val rgp3Checked = radioGp3.checkedRadioButtonId
 
                 var option1=rgp1Checked //노트북, 태블릿PC
-                var option2=0 //os
+                var option2: String? =null //os
 
                 if (rgp1Checked==R.id.rbtn_laptop){// 노트북
                     option1=0
-                    if (rgp2Checked==R.id.rbtn_macos){
-                        option2=0
-                    }else if (rgp2Checked==R.id.rbtn_i5){
-                        option2=1
-                    }else if (rgp2Checked==R.id.rbtn_i7){
-                        option2=2
+                    option2 = when (rgp2Checked) {
+                        R.id.rbtn_macos -> "macOS"
+                        R.id.rbtn_i5 -> "i5"
+                        R.id.rbtn_i7 -> "i7"
+                        else -> ""
                     }
                 }
                 else if (rgp1Checked==R.id.rbtn_tablet){ //태블릿 PC
                     option1=1
-                    if (rgp3Checked==R.id.rbtn_ios){
-                        option2=0
-                    }else if (rgp3Checked==R.id.rbtn_android){
-                        option2=1
+                    option2 = when (rgp3Checked) {
+                        R.id.rbtn_ios -> "ios"
+                        R.id.rbtn_android -> "android"
+                        else -> ""
                     }
                 }
 
@@ -152,9 +151,9 @@ class RentFragment : Fragment() {
                 val intent = Intent(context, CheckrentActivity::class.java)
                 // 정보 넘겨주기
                 intent.putExtra("device", option1)
-                intent.putExtra("os", option2)
+                intent.putExtra("cateName", option2)
                 intent.putExtra("rentDate", rentDate)
-                intent.putExtra("returnDate", rentDate)
+                intent.putExtra("returnDate", returnDate)
 
 
                 startActivity(intent)

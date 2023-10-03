@@ -1,5 +1,6 @@
 package com.example.billage
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,7 @@ class NotiListAdapter (val notiList: MutableList<Noti>) : RecyclerView.Adapter<N
 
     private lateinit var binding : ListReservationBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
-        val binding = ListReservationBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        binding = ListReservationBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
@@ -25,10 +26,18 @@ class NotiListAdapter (val notiList: MutableList<Noti>) : RecyclerView.Adapter<N
         //private val txtSubTitle: TextView = itemView.findViewById(R.id.alarm_subtitle)
 
         fun bind(item: Noti){
-            binding.alarmTitle.text = item.title
-            binding.alarmSubtitle.text = item.subtitle
+            binding.tvResTitle.text = item.title
+            binding.tvDeviceId.text = item.device_id
+            binding.tvDateBook.text = item.date_book
+            binding.tvDateStart.text = item.date_start
+            binding.tvDateDeadline.text = item.date_deadline
+            binding.tvDateReturn.text = item.date_return
+            binding.tvRentExplan.text = item.rt_explan
 
-        }
+
+            }
+
+
 
     }
 }

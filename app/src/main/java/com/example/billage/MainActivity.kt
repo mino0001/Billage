@@ -1,7 +1,9 @@
 package com.example.billage
 
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var homeFragment: HomeFragment
     private lateinit var rentFragment: RentFragment
     private lateinit var moreFragment: MoreFragment
+    private lateinit var sharedPreferences: SharedPreferences
 
     companion object {
 
@@ -31,15 +34,37 @@ class MainActivity : AppCompatActivity() {
         // 레이아웃과 연결
         setContentView(activityMainBinding!!.root)
 
-        if (loginFlag == 0) {
-            /**
-             * 예시
-             */
-            // 로그인되어 있지 않으면 LoginActivity로 이동
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+        // SharedPreferences에서 로그인 상태를 확인
+        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+        if (isLoggedIn) {
+            // 로그인된 경우
+            val savedUserName = sharedPreferences.getString("userName", "")
+            // 필요한 작업 수행, 예: 사용자 정보 표시
+//            Toast.makeText(this, "$savedUserName 님 환영합니다!", Toast.LENGTH_SHORT).show()
+            // 대여 예약한 후에도 토스트 메시지 뜨네...
+
+        } else {
+            // 로그인되지 않은 경우
+            // 필요한 작업 수행, 예: 로그인 화면 표시
+
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
+
+
+//        if (loginFlag == 0) {
+//            /**
+//             * 예시
+//             */
+//            // 로그인되어 있지 않으면 LoginActivity로 이동
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
 
 
         binding.btmNav.setOnItemSelectedListener(onBottomNavItemSelectedListener)

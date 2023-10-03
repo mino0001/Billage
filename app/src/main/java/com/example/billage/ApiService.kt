@@ -2,7 +2,11 @@ package com.example.billage
 
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
@@ -18,8 +22,12 @@ interface ApiService {
     @GET("api/getRentalData.php") // 사용자별 Rental 데이터 불러오기
     fun getRentalData(@Query("u_id") u_id: String): Call<List<Rental>>
 
-    @GET("api/getUserData.php") // User 데이터 불러오기
-    fun getUserData(@Query("u_id") u_id: String, @Query("u_pw") u_pw: String): Call<User>
+    @FormUrlEncoded
+    @POST("api/getUserData.php")
+    fun getUserData(
+        @Field("u_id") u_id: String,
+        @Field("u_pw") u_pw: String
+    ): Call<User>
 
     @GET("api/getDeviceAvailableData.php") // 대여 가능 기기 정보 불러오기
     fun getDeviceAvailableData(
@@ -27,5 +35,13 @@ interface ApiService {
         @Query("rental_start") rental_start: String,
         @Query("rental_deadline") rental_deadline: String
     ): Call<List<Device>>
+
+    @GET("api/saveReserveNew.php") // 새로운 예약 저장하기
+    fun reserveNew(
+        @Query("user_id") user_id: String,
+        @Query("device_id") device_id: String,
+        @Query("rental_start") rental_start: String,
+        @Query("rental_deadline") rental_deadline: String
+    ): Call<String>
 
 }

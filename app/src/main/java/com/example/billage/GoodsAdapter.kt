@@ -62,16 +62,12 @@ class GoodsAdapter(var goodsList: MutableList<Goods>) : RecyclerView.Adapter<Goo
             else {
                 //val filteredList = ArrayList<Goods>()
                 for (goods in goodsList) {
-                    if (goods.name.lowercase(Locale.ROOT).contains(filterString.lowercase(Locale.ROOT))) {
+                    if (goods.name.lowercase(Locale.ROOT).contains(filterString.lowercase(Locale.ROOT)) ||
+                        goods.id.lowercase(Locale.ROOT).contains(filterString.lowercase(Locale.ROOT))) {
                         filteredList.add(goods)
                     }
                 }
-//                val filteredList = goodsList.filter { goods ->
-//                    goods.name.lowercase(Locale.ROOT).contains(filterString.lowercase(Locale.ROOT))
-//                }
-//                results.values = filteredList
-                //results.count = filteredList.size
-                //results.count = filteredList.size
+
             }
 
             results.values = filteredList

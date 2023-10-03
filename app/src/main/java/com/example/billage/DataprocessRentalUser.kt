@@ -25,7 +25,9 @@ class DataprocessRentalUser(private val u_id: String) {
             override fun onResponse(call: Call<List<Rental>>, response: Response<List<Rental>>) {
                 if (response.isSuccessful) {
                     val result = response.body()
+                    Log.e("Response", "Error body: " + response.body())
                     callback(result ?: emptyList())
+
                 } else {
                     Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
                 }
