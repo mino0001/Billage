@@ -36,10 +36,12 @@ class DataprocessAddUser(
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()
                     callback(result?.status) // "success" 또는 "fail" 반환
+                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+
                 } else {
                     callback(null)
                     Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
-                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+//                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
                 }
             }
 

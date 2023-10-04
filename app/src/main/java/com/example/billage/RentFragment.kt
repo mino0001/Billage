@@ -54,7 +54,6 @@ class RentFragment : Fragment() {
         var returnDate: String
         val btnRent = fragmentRentBinding!!.btnRentAvailable
 
-
         val constraintLayout: ConstraintLayout = fragmentRentBinding!!.layout
         val constraintSet = ConstraintSet()
         constraintSet.clone(constraintLayout)

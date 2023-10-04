@@ -9,10 +9,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.billage.databinding.ActivityLoginBinding
-import com.google.android.gms.common.api.Api
 
 
-private var binding: ActivityLoginBinding? = null
 
 class LoginActivity : ComponentActivity() {
 //    private lateinit var usernameEditText: EditText
@@ -92,7 +90,7 @@ class LoginActivity : ComponentActivity() {
                 val userId = user.u_id
                 val userEmail = user.u_email
                 val userPhone = user.u_phone
-                loginFlag = 1
+//                loginFlag = 1
 
                 val editor = sharedPreferences.edit()
                 editor.putString("userName", userName)

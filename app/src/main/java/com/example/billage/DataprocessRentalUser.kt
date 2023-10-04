@@ -9,6 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DataprocessRentalUser(private val u_id: String) {
     private val retrofit: Retrofit
+    //private var fragmentMoreBinding : FragmentMoreBinding? =null
+
 
     init {
         retrofit = Retrofit.Builder()
@@ -17,7 +19,7 @@ class DataprocessRentalUser(private val u_id: String) {
             .build()
     }
 
-    fun requestDataForUser(callback: (List<Rental>) -> Unit) {
+    fun requestDataForUser(callback: (List<Rental>) -> Unit, onFailure: FailureCallback?) {
         val service = retrofit.create(ApiService::class.java)
         val call = service.getRentalData(u_id)
 
@@ -35,7 +37,12 @@ class DataprocessRentalUser(private val u_id: String) {
 
             override fun onFailure(call: Call<List<Rental>>, t: Throwable) {
                 Log.e("Response", "Error: ${t.message}")
+                onFailure?.invoke()
+
             }
         })
     }
+
 }
+
+typealias FailureCallback = () -> Unit
