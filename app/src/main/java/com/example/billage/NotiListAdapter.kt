@@ -3,6 +3,7 @@ package com.example.billage
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.billage.databinding.ListReservationBinding
 
@@ -32,7 +33,19 @@ class NotiListAdapter (val notiList: MutableList<Noti>) : RecyclerView.Adapter<N
             binding.tvDateStart.text = item.date_start
             binding.tvDateDeadline.text = item.date_deadline
             binding.tvDateReturn.text = item.date_return
-            binding.tvRentExplan.text = item.rt_explan
+            var tvExplain = binding.tvRentExplan
+            if (item.title == "연체 알림"){
+                binding.ivNotiIcon.setImageResource(R.drawable.icon_warning)
+            }else {
+                binding.ivNotiIcon.setImageResource(R.drawable.icon_checked)
+            }
+
+            if (item.rt_explan.isNullOrEmpty()){
+                tvExplain.isVisible=false
+            }else {
+                tvExplain.text = item.rt_explan
+
+            }
 
 
             }

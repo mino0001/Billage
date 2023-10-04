@@ -55,8 +55,8 @@ class HomeFragment : Fragment() {
         setupCategorySpinnerHandler()
         buttonFlag=0
 
-        searchView = fragmentHomeBinding!!.toolbar.findViewById(R.id.btn_tb_search)
 
+        searchView = fragmentHomeBinding!!.toolbar.findViewById(R.id.btn_tb_search)
         searchView!!.setOnQueryTextListener(searchViewTextListener)
 
 

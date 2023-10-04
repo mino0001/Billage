@@ -37,35 +37,28 @@ class RentDetailActivity : AppCompatActivity() {
         val tvReturn = resBinding.tvDateReturn
         val tvDeadline = resBinding.tvDateDeadline
         val tvExplan = resBinding.tvRentExplan
+        val ivNoti = resBinding.ivNotiIcon
+        val filteredList: MutableList<Noti> = mutableListOf() // 빈 리스트로 초기화
 
-
-
-
-
-
-//        alarmRecycler()
 
 
         binding.btnBack.setOnClickListener{
             finish()
         }
 
-        // DataprocessRentalUser 객체를 생성합니다.
         val dataProcessor = DataprocessRentalUser(userId.toString())
 
         // 예약 현황 데이터를 가져옵니다.
-        dataProcessor.requestDataForUser { rentalList ->
-            // rentalList에는 해당 사용자의 예약 현황 데이터가 포함됩니다.
+        dataProcessor.requestDataForUser ({ rentalList ->
             if (rentalList.isNotEmpty()) {
-                val filteredList: MutableList<Noti> = mutableListOf() // 빈 리스트로 초기화
                 // rentalList를 사용하여 예약 현황을 처리합니다.
-                for (rental in rentalList) {
-                    val rtState = rental.rt_state.toInt()
-                    val rtBook : String? = rental.rt_book.toString()
-                    val rtStart : String? = rental.rt_start
-                    val rtDeadline : String? = rental.rt_deadline
-                    val rtReturn : String? = rental.rt_return
-                    val dvId : String = rental.d_id
+                for (rental in rentalList.reversed()) {
+                    val rtState = rental.rt_state.toInt()?: 5
+                    val rtBook : String? = rental.rt_book?: ""
+                    val rtStart : String? = rental.rt_start?: ""
+                    val rtDeadline : String? = rental.rt_deadline ?: ""
+                    val rtReturn : String? = rental.rt_return ?: ""
+                    val dvId : String = rental.d_id?: ""
 
 
                     if( rtState == 0 ){
@@ -131,32 +124,26 @@ class RentDetailActivity : AppCompatActivity() {
                             "연체 알림",
                             "기기 ID : $dvId",
                             "예약일 : $rtBook",
-                            rtStart,
-                            rtDeadline,
-                            rtReturn,
-                            "연체되었습니다. 반납해주세요."
+                            "수령일 : $rtStart",
+                            "반납 기한 : $rtDeadline",
+                            "반납일 : $rtReturn",
+                            "연체되었습니다. \n 반납해주세요."
                         )
                         filteredList.add(rtNoti)
 
-                    }else{
+                    }else {
 
                     }
+                    alarmRecycler(filteredList)
 
                 }
-                alarmRecycler(filteredList)
-            } else {
-                // 해당 사용자의 예약 현황 데이터가 없을 경우 처리
-//                val rtNoti = Noti(
-//                    "대여 기기 없음",
-//                    rtBook,
-//                    rtStart,
-//                    rtDeadline,
-//                    rtReturn,
-//                    null
-//                )
-//                filteredList.add(rtNoti)
+            }else{
+
             }
-        }
+
+        },{
+
+        })
 
     }
 
@@ -165,11 +152,6 @@ class RentDetailActivity : AppCompatActivity() {
         binding.alarmRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
         binding.alarmRecyclerView.adapter = AlarmPageListAdapter
 
-//        noti.apply{
-//            add(Noti(title = "예약 확정", subtitle = "sm-12wq31 예약 완료"))
-//            add(Noti(title = "연체 알림", subtitle = "sm-12wq31 연체"))
-//            add(Noti(title = "반납 완료", subtitle = "sm-12wq31 반납 완료"))
-//        }
 
         AlarmPageListAdapter.notifyDataSetChanged()
     }

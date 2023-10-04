@@ -22,7 +22,7 @@ class DataprocessReserveNew(
             .build()
     }
 
-    fun requestReservation(callback: (String) -> Unit) {
+    fun requestReservation(callback: (String?) -> Unit) {
         val service = retrofit.create(ApiService::class.java)
         val call = service.reserveNew(
             user_id,
@@ -31,19 +31,21 @@ class DataprocessReserveNew(
             rental_deadline
         )
 
-        call.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response.isSuccessful) {
+        call.enqueue(object : Callback<ResponseData> {
+            override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
+                if (response.isSuccessful && response.body() != null) {
                     val result = response.body()
-                    callback(result ?: "fail") // 기본값으로 "fail" 반환
+                    callback(result?.status) // "success" 또는 "fail" 반환
+                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
                 } else {
-                    callback("fail")
+                    callback(null)
                     Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
+//                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
                 }
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                callback("fail")
+            override fun onFailure(call: Call<ResponseData>, t: Throwable) {
+                callback(null)
                 Log.e("Response", "Error: ${t.message}")
             }
         })

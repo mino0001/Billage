@@ -31,20 +31,22 @@ class DataprocessAddUser(
 
         val call = service.saveUserNew(u_id, u_pwd, u_name, u_phone, u_email)
 
-        call.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
+        call.enqueue(object : Callback<ResponseData> {
+            override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()
-                    callback(result) //등록 성공 시 'success' 실패 시 'fail'이 들어감. 처리시 if문으로 처리
-                } else { 
-                    callback(null) // 실패 시 null을 전달
-                    Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
+                    callback(result?.status) // "success" 또는 "fail" 반환
                     Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+
+                } else {
+                    callback(null)
+                    Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
+//                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
                 }
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                callback(null) // 실패 시 null을 전달
+            override fun onFailure(call: Call<ResponseData>, t: Throwable) {
+                callback(null)
                 Log.e("Response", "Error: ${t.message}")
             }
         })

@@ -25,24 +25,20 @@ class SignupActivity : ComponentActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-//        usernameEditText = findViewById(R.id.usernameEditText)
-//        passwordEditText = findViewById(R.id.passwordEditText)
-//        phoneEditText = findViewById(R.id.phoneEditText)
-//        emailEditText = findViewById(R.id.emailEditText)
     }
 
     fun onSignupClick(view: View) {
         val userId = binding!!.etNewUserId.text.toString()
         val userPw = binding!!.etNewUserPw.text.toString()
         val userPwRe = binding!!.etNewUserPwRe.text.toString()
+        val userName = binding!!.etNewUserName.text.toString()
         val userPhone = binding!!.etNewUserPhone.text.toString()
         val userEmail = binding!!.etNewUserEmail.text.toString()
 
 
-        if(userId.isEmpty() || userPw.isEmpty() || userPwRe.isEmpty()|| userPhone.isEmpty()||userEmail.isEmpty()){
+        if(userId.isEmpty() || userPw.isEmpty() || userPwRe.isEmpty()|| userPhone.isEmpty()||userEmail.isEmpty()||userName.isEmpty()){
             isExistBlank = true
-        }
-        else{
+        } else{
             if(userPw == userPwRe){
                 isPWSame = true
             }
@@ -53,19 +49,24 @@ class SignupActivity : ComponentActivity() {
             showToast("입력 정보를 모두 입력해주세요.")
         } else if(!isPWSame){
             showToast("비밀번호가 일치하지 않습니다.")
-        }
-        else if(!isValidEmail(userEmail)){
+        } else if(!isValidEmail(userEmail)){
             showToast("올바른 이메일을 입력해주세요.")
-        }
-        else {
-            /***
-             *             여기에서 회원가입 처리
-             */
+        } else if(!isValidPassword(userPw)){
+            showToast("비밀번호를 8자 이상 입력해주세요.")
+        } else {
+            val dataProcessor = DataprocessAddUser(userId, userPw, userName, userPhone, userEmail)
 
-            showToast("회원가입이 완료되었습니다.")
-            // 여기에서 로그인 페이지로 이동
+            dataProcessor.requestAddUserData { result ->
+                if (result == "success") {
+                    showToast("회원가입이 완료되었습니다.")
+                } else {
+                    showToast("회원가입에 실패하였습니다.")
+                }
+            }
+
             intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

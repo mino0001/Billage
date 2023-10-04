@@ -1,6 +1,8 @@
 package com.example.billage
 
 
+//import DataprocessReserveCancel
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,14 +11,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.billage.databinding.FragmentMoreBinding
 
 class MoreFragment : Fragment() {
 
-    private var fragmentMoreBinding : FragmentMoreBinding? =null
+    private var fragmentMoreBinding : FragmentMoreBinding? = null
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var userId : String
 //    private lateinit var sharedPreferences: SharedPreferences
 
 
@@ -51,22 +55,10 @@ class MoreFragment : Fragment() {
     ): View? {
 
         Log.d(TAG, "ProfileFragment - onCreateView() called")
-
-        val binding : FragmentMoreBinding = FragmentMoreBinding.inflate(inflater,container,false)
+        val binding = FragmentMoreBinding.inflate(inflater,container,false)
         fragmentMoreBinding = binding
 
-//        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-
         return fragmentMoreBinding!!.root
-
-        /***
-         *  사용자가 대여한 제품 -> 예약 현황
-         *
-         *  state 어떻게 분류하는지
-         *
-         */
-
-
 
     }
 
@@ -74,8 +66,9 @@ class MoreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val userId = sharedPreferences.getString("userId", "").toString()
+        userId = sharedPreferences.getString("userId", "").toString()
         val userName = sharedPreferences.getString("userName", "")
+        val editor = sharedPreferences.edit()
         val dataProcessor = DataprocessRentalUser(userId)
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
         val ivState = fragmentMoreBinding!!.ivState
@@ -87,6 +80,8 @@ class MoreFragment : Fragment() {
         val tvStateMore = fragmentMoreBinding!!.tvStateMore
 //        val btnDeviceRt = fragmentMoreBinding!!.btnDeviceReturn
 
+
+
         // 사용자 정보 사용
         if (isLoggedIn) {
             // 로그인된 경우 처리
@@ -94,11 +89,15 @@ class MoreFragment : Fragment() {
             fragmentMoreBinding!!.tvMoreUserId.text = userId
         }
 
-        dataProcessor.requestDataForUser { rentalList ->
+        dataProcessor.requestDataForUser ({ rentalList ->
             // rentalList에는 해당 사용자의 예약 현황 데이터가 포함됩니다.
             if (rentalList.isNotEmpty()) {
                 val latestRental = rentalList.last()
-                val rentalState = latestRental.rt_state.toInt()
+                val rentalState = latestRental.rt_state.toInt() ?: 5
+
+                editor.putInt("userRtState", rentalState)
+                editor.apply()
+
 
                 if (rentalState == 0 ){ // 예약완료
                     val rtBook = latestRental.rt_book
@@ -109,7 +108,7 @@ class MoreFragment : Fragment() {
 
 
                     btnCancelReserve.setOnClickListener{//예약취소 버튼
-                        performCancelReserve()
+                        showRentConfirmationDialog()
                     }
                 } else if (rentalState == 1){ //대여 중
                     val rtDeadline = latestRental.rt_deadline
@@ -134,7 +133,7 @@ class MoreFragment : Fragment() {
 
                 }else if (rentalState == 4){ // 연체
                     tvStateTitle.text = "연체"
-                    tvStateMore.text = "연체되었습니다. 반납해주세요."
+                    tvStateMore.text = "* 연체 *  반납해주세요."
                     ivState.setImageResource(R.drawable.icon_warning)
                     btnCancelReserve.isVisible = false
                     btnCancelReserve.isEnabled = false
@@ -152,23 +151,40 @@ class MoreFragment : Fragment() {
                 }
             } else {
                 // 해당 사용자의 예약 현황 데이터가 없을 경우 처리
+                tvStateTitle.text = "기록 없음"
+                tvStateMore.text = "기기를 예약 해주세요."
+                ivState.setImageResource(R.drawable.icon_none)
+                btnCancelReserve.isVisible = false
+                btnCancelReserve.isEnabled = false
+                btnDetailReserve.isVisible = false
+                btnDetailReserve.isEnabled = false
             }
+        }, {
+            tvStateTitle.text = "기록 없음"
+            tvStateMore.text = "기기를 예약 해주세요."
+            ivState.setImageResource(R.drawable.icon_none)
+            btnCancelReserve.isVisible = false
+            btnCancelReserve.isEnabled = false
+            btnDetailReserve.isVisible = true
+            btnDetailReserve.isEnabled = true
+        })
+
+        val onFailureOccurred = true // 실패 여부를 어떻게 판단하는지에 따라서 조절
+        if (onFailureOccurred) {
+
         }
 
         btnChgPwd.setOnClickListener(){
 
             val intent = Intent(context, ChpwdActivity::class.java)
-
             startActivity(intent)
-
         }
 
 
 
         btnDetailReserve.setOnClickListener{
 
-            val intent = Intent(context, MainActivity::class.java)
-
+            val intent = Intent(context, RentDetailActivity::class.java)
             startActivity(intent)
         }
 
@@ -179,7 +195,20 @@ class MoreFragment : Fragment() {
 
     }
     private fun performCancelReserve() {
+        val dataProcessor = DataprocessReserveCancel(userId)
 
+        dataProcessor.requestReserveCancel { result ->
+            if (result == "success") {
+                // 예약 취소 성공 시
+                // 취소 성공 메시지를 표시하거나 다른 작업을 수행할 수 있습니다.
+                (activity as MainActivity).showToast("예약이 취소되었습니다.")
+                Log.d("Reservation", "예약이 성공적으로 취소되었습니다.")
+            } else {
+                // 예약 취소 실패 시 또는 "fail" 메시지를 받았을 때
+                (activity as MainActivity).showToast("예약 취소에 실패했습니다.")
+                Log.e("Reservation", "예약 취소에 실패했습니다.")
+            }
+        }
     }
 
 
@@ -203,7 +232,23 @@ class MoreFragment : Fragment() {
         startActivity(intent)
     }
 
+    private fun showRentConfirmationDialog() {
+        val builder = AlertDialog.Builder(context)
 
+        builder.setTitle("예약 취소 확인")
+        builder.setMessage("예약을 취소 하시겠습니까?")
 
+        builder.setPositiveButton("네") { dialog, which ->
+            performCancelReserve()
+        }
 
+        builder.setNegativeButton("아니오") { dialog, which ->
+            dialog.dismiss() // 대화상자 닫기
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
+
+
+}
