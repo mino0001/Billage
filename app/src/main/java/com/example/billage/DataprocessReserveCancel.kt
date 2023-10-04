@@ -1,4 +1,7 @@
+package com.example.billage
+
 import android.util.Log
+import com.example.billage.ResponseData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,12 +29,12 @@ class DataprocessReserveCancel(
 
         val call = service.saveReserveCancel(rt_id)
 
-        call.enqueue(object : Callback<ResponseData> {
-            override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
+        call.enqueue(object : Callback<ResponseDataforApi> {
+            override fun onResponse(call: Call<ResponseDataforApi>, response: Response<ResponseDataforApi>) {
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()
                     callback(result?.status) // "success" 또는 "fail" 반환
-                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+                    Log.e("Response", "Error body: ${response.body()}")
 
                 } else {
                     callback(null)
@@ -40,7 +43,7 @@ class DataprocessReserveCancel(
                 }
             }
 
-            override fun onFailure(call: Call<ResponseData>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseDataforApi>, t: Throwable) {
                 callback(null)
                 Log.e("Response", "Error: ${t.message}")
             }

@@ -31,12 +31,12 @@ class DataprocessReserveNew(
             rental_deadline
         )
 
-        call.enqueue(object : Callback<ResponseData> {
-            override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
+        call.enqueue(object : Callback<ResponseDataforApi> {
+            override fun onResponse(call: Call<ResponseDataforApi>, response: Response<ResponseDataforApi>) {
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()
                     callback(result?.status) // "success" 또는 "fail" 반환
-                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+                    Log.e("Response", "Error body: ${response.body()}")
                 } else {
                     callback(null)
                     Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
@@ -44,7 +44,7 @@ class DataprocessReserveNew(
                 }
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseDataforApi>, t: Throwable) {
                 callback("fail")
                 Log.e("Response", "Error: ${t.message}")
             }

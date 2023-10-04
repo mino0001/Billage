@@ -9,5 +9,6 @@ data class Device(
     val u_id: String,
     val c_id: String,
     val c_name: String,
-    val d_token: String
+    val d_token: String,
+    val rental_count: String
 )
