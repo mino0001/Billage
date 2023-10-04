@@ -13,7 +13,8 @@ import retrofit2.http.POST
 
 class DataprocessUserPasswordChange(
     private val u_id: String,
-    private val u_pwd: String
+    private val u_pwd_old: String,
+    private val u_pwd_new: String
 ) {
     private val retrofit: Retrofit
 
@@ -27,7 +28,7 @@ class DataprocessUserPasswordChange(
     fun requestUserPasswordChange(callback: (String?) -> Unit) {
         val service = retrofit.create(ApiService::class.java)
 
-        val call = service.saveUserPasswordChange(u_id, u_pwd)
+        val call = service.saveUserPasswordChange(u_id, u_pwd_old, u_pwd_new)
 
         call.enqueue(object : Callback<ResponseData> {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {

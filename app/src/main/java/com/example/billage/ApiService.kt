@@ -65,7 +65,8 @@ interface ApiService {
     @POST("api/saveUserPasswordChange.php")
     fun saveUserPasswordChange(
         @Field("u_id") u_id: String,
-        @Field("u_pwd") u_pwd: String
+        @Field("u_pwd_old") u_pwd_old: String,
+        @Field("u_pwd_new") u_pwd_new: String
     ): Call<ResponseData>
 
 }
