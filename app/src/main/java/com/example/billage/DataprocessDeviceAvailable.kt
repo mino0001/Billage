@@ -29,7 +29,9 @@ class DataprocessDeviceAvailable(
             override fun onResponse(call: Call<List<Device>>, response: Response<List<Device>>) {
                 if (response.isSuccessful) {
                     val result = response.body()
+                    Log.e("Response", "Error body: " + response.body())
                     callback(result)
+
                 } else {
                     callback(null) // 데이터 가져오기 실패 시 null을 전달
                     Log.e("Response", "Unsuccessful response. Code: ${response.code()}")

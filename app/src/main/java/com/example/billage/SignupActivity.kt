@@ -58,7 +58,9 @@ class SignupActivity : ComponentActivity() {
             showToast("올바른 이메일을 입력해주세요.")
         }
         else {
-            // 여기에서 회원가입 처리
+            /***
+             *             여기에서 회원가입 처리
+             */
 
             showToast("회원가입이 완료되었습니다.")
             // 여기에서 로그인 페이지로 이동

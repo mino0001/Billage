@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:padding="10dp"
+        android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,8 @@
             android:id="@+id/iv_user_icon"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="24dp"
             android:src="@drawable/icon_user"
             app:layout_constraintBottom_toTopOf="@+id/tv_user_name"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,14 +78,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_home_id"
+            android:id="@+id/tv_user_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="학번"
+            android:layout_marginTop="10dp"
+            android:text="teamBeam@sookmyung.ac.kr"
             android:textSize="20sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/iv_user_icon"
             app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="@+id/iv_user_icon"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_id" />
+
+        <TextView
+            android:id="@+id/tv_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="1912345"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_user_icon"
             app:layout_constraintStart_toStartOf="@+id/iv_user_icon"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
@@ -92,41 +106,29 @@
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="TeamBYM@sookmyung.ac.kr"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:text="김눈송"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/iv_user_icon"
-            app:layout_constraintStart_toStartOf="@+id/iv_user_icon"
-            app:layout_constraintTop_toBottomOf="@+id/tv_home_email" />
-
-        <TextView
-            android:id="@+id/tv_home_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Email Address"
-            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_id"
             app:layout_constraintEnd_toEndOf="@+id/iv_user_icon"
             app:layout_constraintStart_toStartOf="@+id/iv_user_icon"
             app:layout_constraintTop_toBottomOf="@+id/iv_user_icon" />
 
         <TextView
-            android:id="@+id/tv_user_id"
+            android:id="@+id/tv_user_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="32dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="2021134"
+            android:text="010-1234-5678"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@id/btn_change_pw"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_home_id"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_email" />
 
 
 

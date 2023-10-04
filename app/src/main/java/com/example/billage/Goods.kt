@@ -13,7 +13,7 @@ data class Goods(
     var c_name: String, //c_name
     var c_id: String, //c_id
     var token: Int, //d_token
-    var is_checked: Boolean
+
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -25,7 +25,6 @@ data class Goods(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readInt(),
-        parcel.readByte() != 0.toByte()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -38,7 +37,6 @@ data class Goods(
         parcel.writeString(c_name)
         parcel.writeString(c_id)
         parcel.writeInt(token)
-        parcel.writeByte(if (is_checked) 1 else 0)
     }
 
     override fun describeContents(): Int {

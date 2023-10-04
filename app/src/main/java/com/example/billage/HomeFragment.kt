@@ -19,7 +19,6 @@ import com.example.billage.databinding.FragmentHomeBinding
 
 
 var goodsList = mutableListOf<Goods>()
-var wholeList = mutableListOf<Goods>()
 var categoryArray = arrayOf("노트북","태블릿pc")
 var count = 0
 var buttonFlag = 0
@@ -61,17 +60,6 @@ class HomeFragment : Fragment() {
         searchView!!.setOnQueryTextListener(searchViewTextListener)
 
 
-
-        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                goodsAdapter.filter.filter(newText)
-                return true
-            }
-        })
 
 
         fragmentHomeBinding!!.toolbar.setOnMenuItemClickListener {
@@ -116,27 +104,31 @@ class HomeFragment : Fragment() {
             goodsList.clear() // 기존 데이터를 초기화합니다.
 
             // deviceDataList를 순회하면서 Goods 객체를 생성하고 goodsList에 추가합니다.
-            deviceDataList.forEachIndexed { index, device ->
+            deviceDataList.forEach { device ->
 
                 val d_state = device.d_state?.toIntOrNull() ?: 0
                 val d_token = device.d_token?.toIntOrNull() ?: 0
+                val deviceCategory = device.c_name
+
+                val iconResId = when (deviceCategory) {
+                    "android", "ios" -> R.drawable.icon_tablet
+                    else -> R.drawable.icon_laptop
+                }
 
                 val goods = Goods(
-                    device.d_id ?: "",  // d_id
-                    R.drawable.icon_laptop,  // 이미지 리소스 ID (임시로 노트북 이미지를 사용하겠습니다.)
-                    device.d_name ?: "",  // d_name
-                    device.d_model ?: "",  // d_model
-                    device.d_info ?: "",  // d_info
-                    d_state,  // d_state (null이면 0으로 처리)
-                    device.c_name ?: "",  // c_name
-                    device.c_id ?: "", //c_id
-                    d_token,  // d_token (null이면 0으로 처리)
-                    false  // is_checked (초기값은 false)
+                    device.d_id ?: "",
+                    iconResId,
+                    device.d_name ?: "",
+                    device.d_model ?: "",
+                    device.d_info ?: "",
+                    d_state,
+                    device.c_name ?: "",
+                    device.c_id ?: "",
+                    d_token
                 )
                 goodsList.add(goods)  // 생성한 Goods 객체를 goodsList에 추가합니다.
             }
 
-            wholeList = goodsList
 
             goodsAdapter.notifyDataSetChanged()  // RecyclerView를 갱신합니다.
         }
@@ -198,20 +190,6 @@ class HomeFragment : Fragment() {
     private fun setupCategorySpinnerHandler(){
         fragmentHomeBinding!!.spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-
-                /*if(count==0){
-                    count++
-                    goodsList.apply {
-                        add(Goods(1,R.drawable.icon_laptop, "sm-12wq31", "more_1", "노트북",0,false))
-                        add(Goods(2,R.drawable.icon_tablet, "sm-12wq32", "more_2", "태블릿pc",1,false))
-                        add(Goods(3,R.drawable.icon_laptop, "sm-12wq33", "more_3", "노트북",2,false))
-                        add(Goods(4,R.drawable.icon_laptop, "sm-12wq34", "more_4", "노트북",1,false))
-                        add(Goods(5,R.drawable.icon_tablet, "sm-12wq35", "more_5", "태블릿pc",0,false))
-                        add(Goods(6,R.drawable.icon_tablet, "sm-12wq36", "more_6", "태블릿pc",1,false))
-                        add(Goods(7,R.drawable.icon_laptop, "sm-12wq37", "more_7", "노트북",2,false))
-                        add(Goods(8,R.drawable.icon_laptop, "sm-12wq38", "more_8", "노트북",1,false))
-                    }
-                }*/
 
 
                 if(fragmentHomeBinding!!.spinnerCategory.getItemAtPosition(position).equals("전체")){

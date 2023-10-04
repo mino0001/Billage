@@ -1,13 +1,15 @@
 package com.example.billage
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.billage.databinding.ActivityLoginBinding
-//import com.google.android.gms.common.api.Api
+import com.google.android.gms.common.api.Api
 
 
 private var binding: ActivityLoginBinding? = null
@@ -16,18 +18,26 @@ class LoginActivity : ComponentActivity() {
 //    private lateinit var usernameEditText: EditText
 //    private lateinit var passwordEditText: EditText
 
+    private var binding: ActivityLoginBinding? = null
+    private lateinit var sharedPreferences: SharedPreferences
+    var userName : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
 
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         //binding!!.btnSignup.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding!!.btnSignup.setOnClickListener(){
+
             intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
+
+
 
 
 
@@ -48,44 +58,54 @@ class LoginActivity : ComponentActivity() {
         // 여기에서 로그인 처리를 진행하면 됩니다.
         // 실제로는 사용자의 입력과 데이터베이스 등을 비교하여 로그인 결과를 판단하게 될 것입니다.
 
-        //loginFlag = 1
-
-        //val api = Api.create()
-
-        isValidCredentials(userId, userPw)
-
-//        intent = Intent(this, MainActivity::class.java)
+//        loginFlag = 1
+//
+//        val intent = Intent(this, MainActivity::class.java)
 //        startActivity(intent)
+
+        isValidCredentials(userId, userPw) { isValid ->
+            if (isValid) {
+                // 로그인 성공
+                showToast(userName+"님 환영합니다!")
+
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                // 로그인 실패
+                Log.e("Login", "로그인 실패")
+                showToast("로그인 실패. 사용자 아이디와 비밀번호를 확인하세요.")
+            }
+        }
+
+
 
     }
 
-    private fun isValidCredentials(username: String, password: String) {
-        // 여기에서 사용자 인증을 수행하고 결과를 반환합니다.
-        // 데이터베이스 조회, 서버 요청 등
-        // 이 예제에서는 간단히 "user"라는 사용자 이름과 "password"라는 비밀번호로 로그인 성공하는 것으로 가정합니다.
-
+    private fun isValidCredentials(username: String, password: String, callback: (Boolean) -> Unit) {
         val dataProcessor = DataprocessLogin(username, password)
 
         dataProcessor.requestLoginData { user ->
             if (user != null) {
                 // 로그인 성공한 경우 사용자 정보를 사용하세요
-                val username = user.u_name
-                val email = user.u_email
-
+                userName = user.u_name
+                val userId = user.u_id
+                val userEmail = user.u_email
+                val userPhone = user.u_phone
                 loginFlag = 1
-                showToast("로그인 성공!")
 
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-
-
+                val editor = sharedPreferences.edit()
+                editor.putString("userName", userName)
+                editor.putString("userId", userId)
+                editor.putString("userEmail", userEmail)
+                editor.putString("userPhone", userPhone)
+                editor.putBoolean("isLoggedIn", true)
+                editor.apply()
+                // 로그인 성공을 콜백에 알립니다.
+                callback(true)
             } else {
-                // 로그인 실패한 경우 처리
-                Log.e("Login", "로그인 실패")
-
-                showToast("로그인 실패. \t 사용자 아이디와 비밀번호를 확인하세요.")
-
-
+                // 로그인 실패한 경우 콜백에 알립니다.
+                callback(false)
             }
         }
     }
