@@ -197,11 +197,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="1912345"
-                android:textStyle="bold"
-                android:maxLines="1"
                 android:ellipsize="end"
+                android:maxLines="1"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_send_camera"
                 app:layout_constraintStart_toEndOf="@+id/iv_send_camera"
                 app:layout_constraintTop_toBottomOf="@+id/tv_more_user_name" />
@@ -210,10 +209,9 @@
                 android:id="@+id/tv_more_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="김눈송"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/tv_more_user_id"
                 app:layout_constraintTop_toTopOf="@+id/iv_send_camera" />
 
@@ -223,7 +221,7 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/icon_user"
+                android:src="@drawable/icon_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

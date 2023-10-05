@@ -9,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DataprocessRentalUser(private val u_id: String) {
     private val retrofit: Retrofit
-    //private var fragmentMoreBinding : FragmentMoreBinding? =null
 
 
     init {

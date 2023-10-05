@@ -1,6 +1,5 @@
 package com.example.billage
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -23,8 +22,6 @@ class NotiListAdapter (val notiList: MutableList<Noti>) : RecyclerView.Adapter<N
 
     inner class ViewHolder( val binding: ListReservationBinding) : RecyclerView.ViewHolder(binding.root){
 
-        //private val txtTitle: TextView = itemView.findViewById(R.id.alarm_title)
-        //private val txtSubTitle: TextView = itemView.findViewById(R.id.alarm_subtitle)
 
         fun bind(item: Noti){
             binding.tvResTitle.text = item.title
@@ -46,7 +43,6 @@ class NotiListAdapter (val notiList: MutableList<Noti>) : RecyclerView.Adapter<N
                 tvExplain.text = item.rt_explan
 
             }
-
 
             }
 

@@ -45,10 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="내 주소"
-                android:textStyle="bold"
+                android:text="내 정보"
                 android:textColor="@color/black"
                 android:textSize="25sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -69,9 +69,9 @@
             android:id="@+id/iv_user_icon"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/icon_user"
+            android:src="@drawable/icon_profile"
             app:layout_constraintBottom_toTopOf="@+id/tv_user_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +106,7 @@
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:text="김눈송"
             android:textColor="@color/black"
@@ -130,22 +130,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_email" />
 
-
-
-        <!--        <ImageButton-->
-<!--            android:id="@+id/iv_copy"-->
-<!--            android:layout_width="48dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:layout_marginEnd="8dp"-->
-<!--            android:layout_marginBottom="24dp"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            android:onClick="copyToClipboard"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:src="@drawable/icon_copy"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/tv_user_id"-->
-<!--            tools:ignore="SpeakableTextPresentCheck" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

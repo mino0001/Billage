@@ -5,13 +5,10 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.billage.databinding.ActivityRentDetailBinding
 import com.example.billage.databinding.ListReservationBinding
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class RentDetailActivity : AppCompatActivity() {
@@ -20,7 +17,6 @@ class RentDetailActivity : AppCompatActivity() {
 
     lateinit var AlarmPageListAdapter: NotiListAdapter
     lateinit var binding: ActivityRentDetailBinding
-//    private val noti = mutableListOf<Noti>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +27,6 @@ class RentDetailActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getString("userId", "")
-        val resBinding = ListReservationBinding.inflate(layoutInflater)
-        val tvBook = resBinding.tvDateBook
-        val tvStart = resBinding.tvDateStart
-        val tvReturn = resBinding.tvDateReturn
-        val tvDeadline = resBinding.tvDateDeadline
-        val tvExplan = resBinding.tvRentExplan
-        val ivNoti = resBinding.ivNotiIcon
-        val filteredList: MutableList<Noti> = mutableListOf() // 빈 리스트로 초기화
 
 
 
@@ -48,9 +36,9 @@ class RentDetailActivity : AppCompatActivity() {
 
         val dataProcessor = DataprocessRentalUser(userId.toString())
 
-        // 예약 현황 데이터를 가져옵니다.
         dataProcessor.requestDataForUser ({ rentalList ->
             if (rentalList.isNotEmpty()) {
+                val filteredList = mutableListOf<Noti>()
                 // rentalList를 사용하여 예약 현황을 처리합니다.
                 for (rental in rentalList.reversed()) {
                     val rtState = rental.rt_state.toInt()?: 5
@@ -60,90 +48,54 @@ class RentDetailActivity : AppCompatActivity() {
                     val rtReturn : String? = rental.rt_return ?: ""
                     val dvId : String = rental.d_id?: ""
 
+                    val notiTitle: String
+                    var notiOverdue: String? = null
 
-                    if( rtState == 0 ){
-                        val rtNoti = Noti(
-                            "예약 완료",
-                            "기기 ID : $dvId",
-                            "예약일 : $rtBook",
-                            "수령일 : $rtStart",
-                            "반납 기한 : $rtDeadline",
-                            "반납일 : $rtReturn",
-                            null
-                        )
-                        filteredList.add(rtNoti)
-
-                    } else if (rtState == 1){
-                        val rtNoti = Noti(
-                            "대여 중",
-                            "기기 ID : $dvId",
-                            "예약일 : $rtBook",
-                            "수령일 : $rtStart",
-                            "반납 기한 : $rtDeadline",
-                            "반납일 : $rtReturn",
-                            null
-                        )
-                        filteredList.add(rtNoti)
-
-
-                    }else if (rtState == 2){
-                        val rtNoti = Noti(
-                            "예약 취소",
-                            "기기 ID : $dvId",
-                            "예약일 : $rtBook",
-                            "수령일 : $rtStart",
-                            "반납 기한 : $rtDeadline",
-                            "반납일 : $rtReturn",
-                            null
-                        )
-                        filteredList.add(rtNoti)
-
-
-                    }else if (rtState == 3){
-
-                        var notiOverDue =if (checkForOverdue(rtReturn,rtDeadline)){
-                             "연체되었습니다."
-                        } else {
-                             ""
+                    when (rtState) {
+                        0 -> {
+                            notiTitle = "예약 완료"
                         }
-                        val rtNoti = Noti(
-                            "반납 완료",
-                            "기기 ID : $dvId",
-                            "예약일 : $rtBook",
-                            "수령일 : $rtStart",
-                            "반납 기한 : $rtDeadline",
-                            "반납일 : $rtReturn",
-                            notiOverDue
-                        )
-                        filteredList.add(rtNoti)
-
-
-                    }else if (rtState == 4){
-
-                        val rtNoti = Noti(
-                            "연체 알림",
-                            "기기 ID : $dvId",
-                            "예약일 : $rtBook",
-                            "수령일 : $rtStart",
-                            "반납 기한 : $rtDeadline",
-                            "반납일 : $rtReturn",
-                            "연체되었습니다. \n 반납해주세요."
-                        )
-                        filteredList.add(rtNoti)
-
-                    }else {
-
+                        1 -> {
+                            notiTitle = "대여 중"
+                        }
+                        2 -> {
+                            notiTitle = "예약 취소"
+                        }
+                        3 -> {
+                            notiTitle = "반납 완료"
+                            notiOverdue = if (checkForOverdue(rtReturn, rtDeadline)) {
+                                "연체되었습니다."
+                            } else {
+                                null
+                            }
+                        }4 -> {
+                        notiTitle = "연체 알림"
+                        notiOverdue = "연체되었습니다. \n 반납해주세요."
                     }
-                    alarmRecycler(filteredList)
+                        else -> {
+                            // 다른 상태에 대한 처리 필요
+                            continue
+                        }
+                    }
+
+                    val rtNoti = Noti(
+                        notiTitle,
+                        "기기 ID : $dvId",
+                        "예약일 : $rtBook",
+                        "수령일 : $rtStart",
+                        "반납 기한 : $rtDeadline",
+                        "반납일 : $rtReturn",
+                        notiOverdue
+                    )
+
+                    filteredList.add(rtNoti)
+
 
                 }
-            }else{
+                alarmRecycler(filteredList)
 
-            }
-
-        },{
-
-        })
+            }else{ }
+        },{})
 
     }
 
@@ -169,7 +121,6 @@ class RentDetailActivity : AppCompatActivity() {
             // 날짜 파싱 오류 처리
             e.printStackTrace()
         }
-
         // 오류가 발생하거나 날짜 형식이 잘못된 경우 연체로 처리
         return true
     }

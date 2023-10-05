@@ -151,6 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:enabled="false"
+                    android:checked="true"
                     android:text="android"
                     android:textSize="20sp" />
 
@@ -160,7 +161,6 @@
                     android:layout_height="wrap_content"
                     android:text="ios"
                     android:textSize="20sp"
-                    android:checked="true"
                     android:layout_marginEnd="10dp"
                     android:enabled="false"
                     />

@@ -28,7 +28,6 @@ lateinit var goodsAdapter : GoodsAdapter
 class HomeFragment : Fragment() {
 
 
-    //뷰가 사라질 때 즉 메모리에서 날라갈 때 같이 날리기 위해 따로 빼두기
     private var fragmentHomeBinding : FragmentHomeBinding? =null
     private var intent :Intent? = null
     private var searchView: SearchView? = null
@@ -40,7 +39,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    // 메모리에 올라갔을때
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,16 +49,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fragmentHomeBinding!!.toolbar.inflateMenu(R.menu.toolbar_menu)
-       initRecycler()
+        initRecycler()
         setupCategorySpinnerHandler()
         buttonFlag=0
 
-
         searchView = fragmentHomeBinding!!.toolbar.findViewById(R.id.btn_tb_search)
         searchView!!.setOnQueryTextListener(searchViewTextListener)
-
-
-
 
         fragmentHomeBinding!!.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -70,11 +64,6 @@ class HomeFragment : Fragment() {
 
                     true
                 }
-//                R.id.btn_tb_noti -> {
-//                    intent = Intent(context, NotiActivity::class.java)
-//                    startActivity(intent)
-//                    true
-//                }
 
                 else -> false
             }
@@ -85,13 +74,11 @@ class HomeFragment : Fragment() {
             // 가져온 카테고리 데이터에서 이름만 추출하여 categoryArray에 추가합니다.
             categoryArray = categoryDataList.map { it.c_name }.toTypedArray()
 
-            // 나머지 초기화 코드를 실행합니다.
             count = 0
             buttonFlag = 0
             loginFlag = 0
             goodsAdapter = GoodsAdapter(goodsList)
 
-            // 화면을 초기화합니다.
             initRecycler()
             setupCategorySpinnerHandler()
 
@@ -108,6 +95,7 @@ class HomeFragment : Fragment() {
 
                 val d_state = device.d_state?.toIntOrNull() ?: 0
                 val d_token = device.d_token?.toIntOrNull() ?: 0
+                val rental_count = device.rental_count
                 val deviceCategory = device.c_name
 
                 val iconResId = when (deviceCategory) {
@@ -124,7 +112,9 @@ class HomeFragment : Fragment() {
                     d_state,
                     device.c_name ?: "",
                     device.c_id ?: "",
-                    d_token
+                    d_token,
+                    rental_count ?:""
+
                 )
                 goodsList.add(goods)  // 생성한 Goods 객체를 goodsList에 추가합니다.
             }

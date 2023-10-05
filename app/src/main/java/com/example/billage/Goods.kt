@@ -13,6 +13,7 @@ data class Goods(
     var c_name: String, //c_name
     var c_id: String, //c_id
     var token: Int, //d_token
+    val rental_count: String
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -25,7 +26,9 @@ data class Goods(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readInt(),
-    )
+        parcel.readString() ?: "",
+
+        )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
@@ -37,6 +40,8 @@ data class Goods(
         parcel.writeString(c_name)
         parcel.writeString(c_id)
         parcel.writeInt(token)
+        parcel.writeString(rental_count)
+
     }
 
     override fun describeContents(): Int {

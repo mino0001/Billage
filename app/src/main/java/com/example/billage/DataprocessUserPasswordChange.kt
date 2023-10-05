@@ -7,47 +7,41 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DataprocessReserveNew(
-    private val user_id: String,
-    private val device_id: String,
-    private val rental_start: String,
-    private val rental_deadline: String
+
+class DataprocessUserPasswordChange(
+    private val u_id: String,
+    private val u_pwd_old: String,
+    private val u_pwd_new: String
 ) {
     private val retrofit: Retrofit
 
     init {
         retrofit = Retrofit.Builder()
-            .baseUrl("http://billage.dothome.co.kr/") // base URL
+            .baseUrl("http://billage.dothome.co.kr/") // 기본 URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    fun requestReservation(callback: (String?) -> Unit) {
+    fun requestUserPasswordChange(callback: (String?) -> Unit) {
         val service = retrofit.create(ApiService::class.java)
-        val call = service.reserveNew(
-            user_id,
-            device_id,
-            rental_start,
-            rental_deadline
-        )
+
+        val call = service.saveUserPasswordChange(u_id, u_pwd_old, u_pwd_new)
 
         call.enqueue(object : Callback<ResponseData> {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()
                     callback(result?.status) // "success" 또는 "fail" 반환
-                    Log.e("Response", "Error body: " + response.body())
-
+                    Log.e("Response", "Error body: ${response.body()}")
                 } else {
                     callback(null)
-                    Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
-                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+                    Log.e("Response", "응답 실패. 코드: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseData>, t: Throwable) {
                 callback(null)
-                Log.e("Response", "Error: ${t.message}")
+                Log.e("Response", "에러: ${t.message}")
             }
         })
     }

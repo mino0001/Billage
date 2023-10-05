@@ -6,9 +6,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
+
 
 class DataprocessAddUser(
     private val u_id: String,
@@ -36,12 +34,12 @@ class DataprocessAddUser(
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()
                     callback(result?.status) // "success" 또는 "fail" 반환
-                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+                    Log.e("Response", "Error body: ${response.body()}")
 
                 } else {
                     callback(null)
                     Log.e("Response", "Unsuccessful response. Code: ${response.code()}")
-//                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
                 }
             }
 

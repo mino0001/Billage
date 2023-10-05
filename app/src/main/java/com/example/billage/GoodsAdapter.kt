@@ -49,7 +49,6 @@ class GoodsAdapter(var goodsList: MutableList<Goods>) : RecyclerView.Adapter<Goo
             val filterString = charSequence.toString().trim { it <= ' ' }
             val results = FilterResults()
             val filteredList: ArrayList<Goods> = ArrayList<Goods>()
-//            var filteredList = ArrayList<Goods>()
 
 
             //공백제외 아무런 값이 없을 경우 -> 원본 배열
@@ -60,7 +59,6 @@ class GoodsAdapter(var goodsList: MutableList<Goods>) : RecyclerView.Adapter<Goo
 
             }
             else {
-                //val filteredList = ArrayList<Goods>()
                 for (goods in goodsList) {
                     if (goods.name.lowercase(Locale.ROOT).contains(filterString.lowercase(Locale.ROOT)) ||
                         goods.id.lowercase(Locale.ROOT).contains(filterString.lowercase(Locale.ROOT))) {
@@ -71,18 +69,14 @@ class GoodsAdapter(var goodsList: MutableList<Goods>) : RecyclerView.Adapter<Goo
             }
 
             results.values = filteredList
-//            results.count = filteredList.size
 
             return results
         }
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-
-
             filteredGoods.clear()
             filteredGoods.addAll(results?.values as MutableList<Goods>)
             notifyDataSetChanged()
-
 
         }
 

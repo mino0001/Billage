@@ -6,9 +6,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+
 
 
 class DataprocessReserveCancel(
@@ -33,7 +31,8 @@ class DataprocessReserveCancel(
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()
                     callback(result?.status) // "success" 또는 "fail" 반환
-                    Log.e("Response", "Error body: ${response.errorBody()?.string()}")
+                    Log.e("Response", "Error body: " + response.body())
+
 
                 } else {
                     callback(null)

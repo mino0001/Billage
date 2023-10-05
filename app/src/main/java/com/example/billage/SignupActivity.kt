@@ -6,7 +6,6 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
 import com.example.billage.databinding.ActivitySignupBinding
 
 private var binding: ActivitySignupBinding? = null
@@ -15,16 +14,12 @@ class SignupActivity : ComponentActivity() {
 
     var isExistBlank = false
     var isPWSame = false
-//    private lateinit var userId: EditText
-//    private lateinit var userPw: EditText
-//    private lateinit var userPhone: EditText
-//    private lateinit var userEmail: EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
-
     }
 
     fun onSignupClick(view: View) {

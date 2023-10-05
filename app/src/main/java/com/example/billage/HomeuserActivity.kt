@@ -30,17 +30,11 @@ class HomeuserActivity : ComponentActivity() {
             binding!!.tvUserEmail.setText(userEmail)
             binding!!.tvUserPhone.setText(userPhone)
         }
-//        else {
-//            // 로그인되지 않은 경우 처리
-//        }
-
 
 
         binding!!.btnBack.setOnClickListener{
             finish()
         }
-
-
 
     }
 }
