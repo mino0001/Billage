@@ -2,6 +2,7 @@
 블록체인으로 사용자의 거래 이력을 저장하고, 기기별로 사용 이력을 안전하게 보관하는 전자기기 대여 서비스
 
 # 기본 기능
+### 애플리케이션 : 사용자용
 <div>애플리케이션 : 사용자용</div>
 <div>1. LoginActivity : login 상태에서 접근 가능</div>
 <div>1-1 SignupActivity  : 회원가입</div>
@@ -13,7 +14,7 @@
 <div>2-3 MoreFragment : 로그아웃, 연체 정보 확인 등 세부 기능 </div>
 <div>2-3-1 RentDetailActivity : 세부 대여 내역 조회 </div>
 
-
+### 웹 : 관리자용
 <div>웹 : 관리자용</div>
 <div> 새 기기 등록</div>
 <div> 신규 기기 예약 등록</div>
